@@ -1,0 +1,10 @@
+.app{
+  border-style: solid;
+}
+
+.para {
+  display: block;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+  text-align: justify;
+}
