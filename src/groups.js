@@ -3,7 +3,7 @@ import { Container, Row, Col } from "reactstrap";
 import { Link } from "react-router-dom";
 import { Card, CardImg, CardTitle, Button, Label } from "reactstrap";
 
-const Groups = ({ state, setState, ...props }) => {
+const Groups = ({ state, setState, app, setApp, ...props }) => {
   const icons = Object.keys(state).map((key) => state[key]);
   const iconCards = icons.map((icon) => {
     return (
@@ -93,17 +93,19 @@ const Groups = ({ state, setState, ...props }) => {
       </Container>
 
       <div
+        style={{ marginTop: 3 + "em", marginBottom: 3 + "em" }}
         className="text-center"
-        style={{
-          marginBottom: 3 + "em",
-          marginTop: 3 + "em",
-        }}
       >
-        <Link to="/public">
-          <Button color="danger">Back</Button>
+        <Link to="/apppicker">
+          <Button style={{ marginRight: 8 + "em" }} color="primary">
+            Back
+          </Button>
         </Link>
-        <Link to="/friends">
-          <Button color="primary">Next</Button>
+
+        <Link to="/grouping">
+          <Button style={{ marginLeft: 8 + "em" }} color="primary">
+            Next
+          </Button>
         </Link>
       </div>
     </div>

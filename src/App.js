@@ -8,13 +8,14 @@ import AppPicker from "./appPicker";
 import Public from "./firstLayer";
 import Relation from "./relations";
 import "./App.css";
-import Groups from "./secondLayer";
+import Groups from "./groups";
 
 //function App(){
 const App = () => {
   const [state, setState] = useState({});
   const [app, setApp] = useState(icons);
   const [stateFirst, setStateFirst] = useState({
+    name: "",
     password: "",
     checkpass: "",
     counter: 0,
@@ -28,10 +29,10 @@ const App = () => {
     isColleague: false,
     isAcquaintance: false,
     isStranger: false,
-  });
+  });  
   //const [ stateSecond, setStateSecond ] = useState( { password: '', checkpass: '', counter: 0, shareUsers: [{name: ''}] } );
   //const [ pass, setPass ] = useState({ password: '', checkpass: '', counter: 0});
-  console.log(app);
+  console.log(state);
 
   return (
     <div>
@@ -60,6 +61,8 @@ const App = () => {
                       setState={setState}
                       app={app}
                       setApp={setApp}
+                      stateFirst={stateFirst}
+                      setStateFirst={setStateFirst}
                       {...props}
                     />
                   )}
@@ -70,8 +73,8 @@ const App = () => {
                     <Groups
                       state={state}
                       setState={setState}
-                      stateFirst={stateFirst}
-                      setStateFirst={setStateFirst}
+                      app={app}
+                      setApp={setApp}
                       {...props}
                     />
                   )}

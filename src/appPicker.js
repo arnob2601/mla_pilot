@@ -3,26 +3,30 @@ import { Container, Row, Col } from "reactstrap";
 import { Link } from "react-router-dom";
 import { Card, CardImg, CardTitle, Button, Label } from "reactstrap";
 
-
-const AppPicker = ({ state, setState, app, setApp, ...props }) => {
+const AppPicker = ({ state, setState, app, setApp, stateFirst, setStateFirst, ...props }) => {
   //const icons = Object.keys(app).map((key) => app[key]);
-  
+
   const handleName = (e) => {
-    setState({ ...state, name: e.target.value });
+    setStateFirst({ ...stateFirst, name: e.target.value });
   };
 
   const addApp = () => {
-    const id = app.length + 1;
-    const src = require("./Images/Demo.png");
-    const title = state.name;
-    const newApp = { id, src, title };
-    setApp([...app, newApp]);
-    setState({...state, name: ''});
+    if (stateFirst.name.length > 0) {
+      const id = app.length + 1;
+      const src = require("./Images/Demo.png");
+      const title = stateFirst.name;
+      const newApp = { id, src, title };
+      setApp([...app, newApp]);
+      setStateFirst({ ...stateFirst, name: "" });
+    }
   };
 
   const iconCards = app.map((icon) => {
     return (
-      <Col key={icon.id} style={{ marginBottom: 1 + 'em', marginTop: 1 + 'em'}}>
+      <Col
+        key={icon.id}
+        style={{ marginBottom: 1 + "em", marginTop: 1 + "em" }}
+      >
         <Card>
           <Label>
             <input
@@ -45,7 +49,9 @@ const AppPicker = ({ state, setState, app, setApp, ...props }) => {
               checked={Boolean(state[icon.id])}
             />
             <CardImg src={icon.src} alt={icon.title} />
-            <CardTitle className="text-center" style={{fontSize: '12px'}}>{icon.title}</CardTitle>
+            <CardTitle className="text-center" style={{ fontSize: "12px" }}>
+              {icon.title}
+            </CardTitle>
           </Label>
         </Card>
       </Col>
