@@ -5,10 +5,10 @@ import { icons } from "./icons";
 import Welcome from "./welcome";
 import Trailer from "./trailer";
 import AppPicker from "./appPicker";
-import Public from "./firstLayer";
+import Groups from "./groups";
 import Relation from "./relations";
 import "./App.css";
-import Groups from "./groups";
+
 
 //function App(){
 const App = () => {
@@ -32,7 +32,7 @@ const App = () => {
   });  
   //const [ stateSecond, setStateSecond ] = useState( { password: '', checkpass: '', counter: 0, shareUsers: [{name: ''}] } );
   //const [ pass, setPass ] = useState({ password: '', checkpass: '', counter: 0});
-  console.log(state);
+  //console.log(state);
 
   return (
     <div>
@@ -75,6 +75,8 @@ const App = () => {
                       setState={setState}
                       app={app}
                       setApp={setApp}
+                      stateFirst={stateFirst}
+                      setStateFirst={setStateFirst}
                       {...props}
                     />
                   )}

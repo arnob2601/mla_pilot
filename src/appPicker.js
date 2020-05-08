@@ -3,8 +3,16 @@ import { Container, Row, Col } from "reactstrap";
 import { Link } from "react-router-dom";
 import { Card, CardImg, CardTitle, Button, Label } from "reactstrap";
 
-const AppPicker = ({ state, setState, app, setApp, stateFirst, setStateFirst, ...props }) => {
-  //const icons = Object.keys(app).map((key) => app[key]);
+const AppPicker = ({
+  state,
+  setState,
+  app,
+  setApp,
+  stateFirst,
+  setStateFirst,
+  ...props
+}) => {
+  const item = Object.keys(state).map((key) => app[key]);
 
   const handleName = (e) => {
     setStateFirst({ ...stateFirst, name: e.target.value });
@@ -77,7 +85,7 @@ const AppPicker = ({ state, setState, app, setApp, stateFirst, setStateFirst, ..
             style={{ width: 250 }}
             type="text"
             onChange={handleName}
-            value={state.name}
+            value={stateFirst.name}
             placeholder="Type app name here to add.."
           />
           <button onClick={addApp}>Add App</button>
@@ -95,7 +103,7 @@ const AppPicker = ({ state, setState, app, setApp, stateFirst, setStateFirst, ..
         </Link>
 
         <Link to="/grouping">
-          <Button style={{ marginLeft: 8 + "em" }} color="primary">
+          <Button disabled={ item.length === 0 } style={{ marginLeft: 8 + "em" }} color="primary">
             Next
           </Button>
         </Link>

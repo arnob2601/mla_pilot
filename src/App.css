@@ -8,3 +8,11 @@
   margin-bottom: 1.5em;
   text-align: justify;
 }
+
+.box {
+  text-align: center;
+  border-style: dashed;
+  padding-top: 2em;
+  padding-bottom: 2em;
+  margin-top: 2em;
+}
