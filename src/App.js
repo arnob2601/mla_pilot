@@ -29,10 +29,11 @@ const App = () => {
     isColleague: false,
     isAcquaintance: false,
     isStranger: false,
-  });  
+  });
+  const [group, setGroup] = useState( { familyInfoId: [], familyInfo: [] } );  
   //const [ stateSecond, setStateSecond ] = useState( { password: '', checkpass: '', counter: 0, shareUsers: [{name: ''}] } );
   //const [ pass, setPass ] = useState({ password: '', checkpass: '', counter: 0});
-  //console.log(state);
+  console.log(group);
 
   return (
     <div>
@@ -77,6 +78,8 @@ const App = () => {
                       setApp={setApp}
                       stateFirst={stateFirst}
                       setStateFirst={setStateFirst}
+                      group={group}
+                      setGroup={setGroup}
                       {...props}
                     />
                   )}

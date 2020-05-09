@@ -10,9 +10,7 @@
 }
 
 .box {
-  text-align: center;
   border-style: dashed;
-  padding-top: 2em;
-  padding-bottom: 2em;
+  padding: 2em 2em;
   margin-top: 2em;
 }

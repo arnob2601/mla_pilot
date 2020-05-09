@@ -88,7 +88,12 @@ const AppPicker = ({
             value={stateFirst.name}
             placeholder="Type app name here to add.."
           />
-          <button onClick={addApp}>Add App</button>
+          <button
+            style={{ background: "#007bff", color: "white" }}
+            onClick={addApp}
+          >
+            Add App
+          </button>
         </div>
       </Container>
 
@@ -103,7 +108,11 @@ const AppPicker = ({
         </Link>
 
         <Link to="/grouping">
-          <Button disabled={ item.length === 0 } style={{ marginLeft: 8 + "em" }} color="primary">
+          <Button
+            disabled={item.length === 0}
+            style={{ marginLeft: 8 + "em" }}
+            color="primary"
+          >
             Next
           </Button>
         </Link>

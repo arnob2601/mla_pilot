@@ -10,12 +10,34 @@ const Groups = ({
   setApp,
   stateFirst,
   setStateFirst,
+  group,
+  setGroup,
   ...props
 }) => {
+  const familyApps = Object.keys(group).map((key) => group[key]);
+  console.log(familyApps);
+  const familySelectedApps = familyApps[1].map((icon, idx) => {
+    return (
+      <Card id={icon} draggable="false">
+        <Label>
+          <CardImg src={icon.src} alt={icon.title} />
+          <CardTitle className="text-center" style={{ fontSize: "12px" }}>
+            {icon.title}
+          </CardTitle>
+        </Label>
+      </Card> 
+    );
+  });
+
   const drop = (e) => {
     e.preventDefault();
-    const data = JSON.parse(e.dataTransfer.getData("card_id"));
-    console.log(data); //takes the icon information
+    const data = JSON.parse(e.dataTransfer.getData("card"));
+    const idx = e.target.id;
+    setGroup({
+      ...group,
+      familyInfoId: group.familyInfoId.concat([idx]),
+      familyInfo: group.familyInfo.concat([data]),
+    });
   };
 
   const dragOver = (e) => {
@@ -25,15 +47,29 @@ const Groups = ({
   const familyCards = stateFirst.family.map((rel, idx) => {
     if (rel.name === "" && stateFirst.family.length === 1)
       return (
-        <div onDrop={drop} onDragOver={dragOver} className="box" key={idx}>
-          Family Members
-        </div>
+        <Row
+          onDrop={drop}
+          onDragOver={dragOver}
+          className="box"
+          key={idx}
+          id={idx}
+        >
+          {familySelectedApps}
+        </Row>
       );
     else if (rel.name !== "")
       return (
-        <div onDrop={drop} onDragOver={dragOver} className="box" key={idx}>
-          {rel.name}
-        </div>
+        <Row
+          onDrop={drop}
+          onDragOver={dragOver}
+          className="box"
+          key={idx}
+          id={idx}
+        >
+          {//rel.name
+            familySelectedApps
+          }
+        </Row>
       );
     return 0;
   });
@@ -107,12 +143,15 @@ const Groups = ({
     return (
       <Col
         key={icon.id}
-        style={{ marginBottom: 1 + "em", marginTop: 1 + "em" }}
+        style={{ marginBottom: 0.5 + "em", marginTop: 0.5 + "em" }}
       >
-        <Card onDragStart={(e) => {
-          e.dataTransfer.setData("card_id", JSON.stringify(icon));
-        }} 
-        id={icon} draggable="true">
+        <Card
+          onDragStart={(e) => {
+            e.dataTransfer.setData("card", JSON.stringify(icon));
+          }}
+          id={icon}
+          draggable="true"
+        >
           <Label>
             <CardImg src={icon.src} alt={icon.title} />
             <CardTitle className="text-center" style={{ fontSize: "12px" }}>
@@ -130,7 +169,7 @@ const Groups = ({
         <p
           style={{
             marginTop: 3 + "em",
-            marginBottom: 3 + "em",
+            //marginBottom: 3 + "em",
             textAlign: "justify",
           }}
         >
@@ -138,17 +177,20 @@ const Groups = ({
           specific relation) that you would like to share with.
         </p>
 
-        {/*Edit here  */}
-        <Row xs="5">
-          {stateFirst.isFamily && <div>{familyCards}</div>}
-          {stateFirst.isFriend && <div>{friendCards}</div>}
-          {stateFirst.isColleague && <div>{colleagueCards}</div>}
-          {stateFirst.isAcquaintance && <div>{acquaintanceCards}</div>}
-          {stateFirst.isStranger && <div>{strangerCards}</div>}
-        </Row>
-        {/*End Edit here*/}
+        <Row>
+          <Col>
+            <Row xs="4">{iconCards}</Row>
+          </Col>
+          <Col>
+          {stateFirst.isFamily && familyCards}
+          </Col>
 
-        <Row xs="6">{iconCards}</Row>
+          {/*stateFirst.isFamily && <div>{familyCards}</div>}
+          {stateFirst.isFriend && <div>{friendCards}</div>}
+          {/*stateFirst.isColleague && <div>{colleagueCards}</div>}
+          {stateFirst.isAcquaintance && <div>{acquaintanceCards}</div>}
+          {stateFirst.isStranger && <div>{strangerCards}</div>*/}
+        </Row>
       </Container>
 
       <div

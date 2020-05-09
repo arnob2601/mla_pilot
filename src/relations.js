@@ -140,7 +140,7 @@ const Relation = ({ stateFirst, setStateFirst, ...props }) => {
                     setStateFirst({
                       ...stateFirst,
                       isFamily: false,
-                      family: [{}]
+                      family: [{}],
                     });
                   }
                 }}
@@ -149,8 +149,10 @@ const Relation = ({ stateFirst, setStateFirst, ...props }) => {
             </Label>
             {stateFirst.isFamily === true && (
               <div>
-                <p style={{color: "red", textAlign: "justify"}}>**You can add more specific relation(s) under 
-                family Members entity for your convenience.**</p>
+                <p style={{ color: "red", textAlign: "justify" }}>
+                  **You can add more specific relation(s) under family Members
+                  entity for your convenience.**
+                </p>
                 {stateFirst.family.map((shareUser, idx) => (
                   <div key={idx}>
                     <input
@@ -173,7 +175,7 @@ const Relation = ({ stateFirst, setStateFirst, ...props }) => {
                   </div>
                 ))}
                 <button
-                  //style={{ background: "blue", color: "white" }}
+                  style={{ background: "#007bff", color: "white" }}
                   onClick={handleAddFamily}
                 >
                   Add more relation
@@ -196,7 +198,7 @@ const Relation = ({ stateFirst, setStateFirst, ...props }) => {
                     setStateFirst({
                       ...stateFirst,
                       isFriend: false,
-                      friends: [{}]
+                      friends: [{}],
                     });
                   }
                 }}
@@ -205,8 +207,10 @@ const Relation = ({ stateFirst, setStateFirst, ...props }) => {
             </Label>
             {stateFirst.isFriend === true && (
               <div>
-                <p style={{color: "red", textAlign: "justify"}}>**You can add more specific relation(s) under 
-                friends entity for your convenience.**</p>
+                <p style={{ color: "red", textAlign: "justify" }}>
+                  **You can add more specific relation(s) under friends entity
+                  for your convenience.**
+                </p>
                 {stateFirst.friends.map((shareUser, idx) => (
                   <div key={idx}>
                     <input
@@ -225,7 +229,7 @@ const Relation = ({ stateFirst, setStateFirst, ...props }) => {
                   </div>
                 ))}
                 <button
-                  //style={{ background: "blue", color: "white" }}
+                  style={{ background: "#007bff", color: "white" }}
                   onClick={handleAddFriend}
                 >
                   Add more relation
@@ -251,7 +255,7 @@ const Relation = ({ stateFirst, setStateFirst, ...props }) => {
                     setStateFirst({
                       ...stateFirst,
                       isColleague: false,
-                      colleague: [{}]
+                      colleague: [{}],
                     });
                   }
                 }}
@@ -260,8 +264,10 @@ const Relation = ({ stateFirst, setStateFirst, ...props }) => {
             </Label>
             {stateFirst.isColleague === true && (
               <div>
-                <p style={{color: "red", textAlign: "justify"}}>**You can add more specific relation(s) under 
-                colleagues entity for your convenience.**</p>
+                <p style={{ color: "red", textAlign: "justify" }}>
+                  **You can add more specific relation(s) under colleagues
+                  entity for your convenience.**
+                </p>
                 {stateFirst.colleague.map((shareUser, idx) => (
                   <div key={idx}>
                     <input
@@ -280,7 +286,7 @@ const Relation = ({ stateFirst, setStateFirst, ...props }) => {
                   </div>
                 ))}
                 <button
-                  //style={{ background: "blue", color: "white" }}
+                  style={{ background: "#007bff", color: "white" }}
                   onClick={handleAddColleague}
                 >
                   Add more relation
@@ -303,7 +309,7 @@ const Relation = ({ stateFirst, setStateFirst, ...props }) => {
                     setStateFirst({
                       ...stateFirst,
                       isAcquaintance: false,
-                      acquaintance: [{}]
+                      acquaintance: [{}],
                     });
                   }
                 }}
@@ -312,8 +318,10 @@ const Relation = ({ stateFirst, setStateFirst, ...props }) => {
             </Label>
             {stateFirst.isAcquaintance === true && (
               <div>
-                <p style={{color: "red", textAlign: "justify"}}>**You can add more specific relation(s) under 
-                acquaintances entity for your convenience.**</p>
+                <p style={{ color: "red", textAlign: "justify" }}>
+                  **You can add more specific relation(s) under acquaintances
+                  entity for your convenience.**
+                </p>
                 {stateFirst.acquaintance.map((shareUser, idx) => (
                   <div key={idx}>
                     <input
@@ -332,7 +340,7 @@ const Relation = ({ stateFirst, setStateFirst, ...props }) => {
                   </div>
                 ))}
                 <button
-                  //style={{ background: "blue", color: "white" }}
+                  style={{ background: "#007bff", color: "white" }}
                   onClick={handleAddAcquaintance}
                 >
                   Add more relation
@@ -344,7 +352,7 @@ const Relation = ({ stateFirst, setStateFirst, ...props }) => {
         <Row style={{ marginTop: 1 + "em", marginBottom: 1 + "em" }}></Row>
         <Row>
           <Col>
-          <Label>
+            <Label>
               <input
                 type="checkbox"
                 checked={stateFirst.isStranger}
@@ -358,17 +366,19 @@ const Relation = ({ stateFirst, setStateFirst, ...props }) => {
                     setStateFirst({
                       ...stateFirst,
                       isStranger: false,
-                      stranger: [{}]
+                      stranger: [{}],
                     });
                   }
                 }}
               />
               Strangers
             </Label>
-            {stateFirst.isStranger === true && (   
+            {stateFirst.isStranger === true && (
               <div>
-                <p style={{color: "red", textAlign: "justify"}}>**You can add more specific relation(s) under 
-                strangers entity for your convenience.**</p>
+                <p style={{ color: "red", textAlign: "justify" }}>
+                  **You can add more specific relation(s) under strangers entity
+                  for your convenience.**
+                </p>
                 {stateFirst.stranger.map((shareUser, idx) => (
                   <div key={idx}>
                     <input
@@ -387,7 +397,7 @@ const Relation = ({ stateFirst, setStateFirst, ...props }) => {
                   </div>
                 ))}
                 <button
-                  //style={{ background: "blue", color: "white" }}
+                  style={{ background: "#007bff", color: "white" }}
                   onClick={handleAddStranger}
                 >
                   Add more relation
@@ -408,7 +418,17 @@ const Relation = ({ stateFirst, setStateFirst, ...props }) => {
           </Link>
 
           <Link to="/apppicker">
-            <Button disabled={!stateFirst.isFamily && !stateFirst.isFriend && !stateFirst.isColleague && !stateFirst.isAcquaintance && !stateFirst.isStranger} style={{ marginLeft: 8 + "em" }} color="primary">
+            <Button
+              disabled={
+                !stateFirst.isFamily &&
+                !stateFirst.isFriend &&
+                !stateFirst.isColleague &&
+                !stateFirst.isAcquaintance &&
+                !stateFirst.isStranger
+              }
+              style={{ marginLeft: 8 + "em" }}
+              color="primary"
+            >
               Next
             </Button>
           </Link>
