@@ -15,28 +15,29 @@ const Groups = ({
   ...props
 }) => {
   const familyApps = Object.keys(group).map((key) => group[key]);
-  console.log(familyApps);
-  const familySelectedApps = familyApps[1].map((icon, idx) => {
-    return (
-      <Card id={icon} draggable="false">
-        <Label>
-          <CardImg src={icon.src} alt={icon.title} />
-          <CardTitle className="text-center" style={{ fontSize: "12px" }}>
-            {icon.title}
-          </CardTitle>
-        </Label>
-      </Card> 
-    );
-  });
+  const familySelectedApps = familyApps.map((x) =>
+    x.map((icon, idx) => {
+      return (
+        <Card key={idx} draggable="false">
+          <Label>
+            <CardImg src={icon.src} alt={icon.title} />
+            <CardTitle className="text-center" style={{ fontSize: "12px" }}>
+              {icon.title}
+            </CardTitle>
+          </Label>
+        </Card>
+      );
+    })
+  );
 
   const drop = (e) => {
     e.preventDefault();
     const data = JSON.parse(e.dataTransfer.getData("card"));
-    const idx = e.target.id;
+    const idx = e.currentTarget.id;
+    console.log(e.currentTarget);
     setGroup({
       ...group,
-      familyInfoId: group.familyInfoId.concat([idx]),
-      familyInfo: group.familyInfo.concat([data]),
+      [idx]: group[idx].concat([data]),
     });
   };
 
@@ -45,33 +46,17 @@ const Groups = ({
   };
 
   const familyCards = stateFirst.family.map((rel, idx) => {
-    if (rel.name === "" && stateFirst.family.length === 1)
-      return (
-        <Row
-          onDrop={drop}
-          onDragOver={dragOver}
-          className="box"
-          key={idx}
-          id={idx}
-        >
-          {familySelectedApps}
-        </Row>
-      );
-    else if (rel.name !== "")
-      return (
-        <Row
-          onDrop={drop}
-          onDragOver={dragOver}
-          className="box"
-          key={idx}
-          id={idx}
-        >
-          {//rel.name
-            familySelectedApps
-          }
-        </Row>
-      );
-    return 0;
+    return (
+      <div
+        onDrop={drop}
+        onDragOver={dragOver}
+        className="box"
+        key={idx}
+        id={"family" + idx}
+      >
+        <Row xs="4">{familySelectedApps[idx]}</Row>
+      </div>
+    );
   });
 
   const friendCards = stateFirst.friends.map((rel, idx) => {
@@ -149,6 +134,9 @@ const Groups = ({
           onDragStart={(e) => {
             e.dataTransfer.setData("card", JSON.stringify(icon));
           }}
+          onDragOver={(e) => {
+            e.stopPropagation();
+          }}
           id={icon}
           draggable="true"
         >
@@ -181,9 +169,7 @@ const Groups = ({
           <Col>
             <Row xs="4">{iconCards}</Row>
           </Col>
-          <Col>
-          {stateFirst.isFamily && familyCards}
-          </Col>
+          <Col>{familyCards}</Col>
 
           {/*stateFirst.isFamily && <div>{familyCards}</div>}
           {stateFirst.isFriend && <div>{friendCards}</div>}

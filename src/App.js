@@ -30,11 +30,9 @@ const App = () => {
     isAcquaintance: false,
     isStranger: false,
   });
-  const [group, setGroup] = useState( { familyInfoId: [], familyInfo: [] } );  
+  const [group, setGroup] = useState({});
   //const [ stateSecond, setStateSecond ] = useState( { password: '', checkpass: '', counter: 0, shareUsers: [{name: ''}] } );
   //const [ pass, setPass ] = useState({ password: '', checkpass: '', counter: 0});
-  console.log(group);
-
   return (
     <div>
       <Container fluid>
@@ -50,6 +48,8 @@ const App = () => {
                     <Relation
                       stateFirst={stateFirst}
                       setStateFirst={setStateFirst}
+                      group={group}
+                      setGroup={setGroup}
                       {...props}
                     />
                   )}

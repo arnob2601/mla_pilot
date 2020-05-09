@@ -23,7 +23,7 @@ const Welcome = () => {
             <p className="para" style={{textAlign: "center", color: "red"}}>***Please do not refresh/close 
             the browser until the study completed screen is shown. Thank you!***</p>
             <div className="text-center">
-                <Link to='/trailer'>
+                <Link to='/sharing'>
                 <Button color="primary" style={
                     {
                         marginTop: 2 + 'em',

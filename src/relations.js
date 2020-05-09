@@ -2,7 +2,17 @@ import React from "react";
 import { Container, Row, Col, Button, Label } from "reactstrap";
 import { Link } from "react-router-dom";
 
-const Relation = ({ stateFirst, setStateFirst, ...props }) => {
+const Relation = ({ stateFirst, setStateFirst, group, setGroup, ...props }) => {
+
+  const addRelation = () => {
+    let x = {};
+    stateFirst.family.map((f, idx) => {
+      x['family'+idx] = []
+    })
+    //console.log(setGroup);
+    setGroup({ ...group, ...x})
+  }
+
   const handleFamilyChange = (idx) => (e) => {
     const newShareUsers = stateFirst.family.map((shareUser, sidx) => {
       if (idx !== sidx) return shareUser;
@@ -411,13 +421,13 @@ const Relation = ({ stateFirst, setStateFirst, ...props }) => {
           style={{ marginTop: 3 + "em", marginBottom: 3 + "em" }}
           className="text-center"
         >
-          <Link to="/trailer">
+          <Link to="/">
             <Button style={{ marginRight: 8 + "em" }} color="primary">
               Back
             </Button>
           </Link>
 
-          <Link to="/apppicker">
+          <Link to="/apppicker" onClick={addRelation}>
             <Button
               disabled={
                 !stateFirst.isFamily &&
