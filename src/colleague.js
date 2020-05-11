@@ -3,7 +3,7 @@ import { Container, Row, Col } from "reactstrap";
 import { Link } from "react-router-dom";
 import { Card, CardImg, CardTitle, Button, Label } from "reactstrap";
 
-const Groups = ({
+const Colleagues = ({
   state,
   setState,
   app,
@@ -14,6 +14,7 @@ const Groups = ({
   setGroup,
   ...props
 }) => {
+  const indexTrack = stateFirst.family.length+stateFirst.friends.length;
   const Apps = Object.keys(group).map((key) => group[key]);
   const selectedApps = Apps.map((x) =>
     x.map((icon, idx) => {
@@ -48,8 +49,8 @@ const Groups = ({
     e.preventDefault();
   };
 
-  const familyCards = stateFirst.family.map((rel, idx) => {
-    let text = "Family Members";
+  const colleagueCards = stateFirst.colleague.map((rel, idx) => {
+    let text = "Colleagues";
     if (rel.name !== "") {
       text = rel.name;
     }
@@ -59,12 +60,44 @@ const Groups = ({
         onDragOver={dragOver}
         className="box"
         key={idx}
-        id={"family" + idx}
+        id={"colleague" + idx}
       >
         <p className="text-center">{text}</p>
-        <Row xs="4">{selectedApps[idx]}</Row>
+        <Row xs="4">{selectedApps[idx+indexTrack]}</Row>
       </div>
     );
+  });
+
+  const acquaintanceCards = stateFirst.acquaintance.map((rel, idx) => {
+    if (rel.name === "" && stateFirst.acquaintance.length === 1)
+      return (
+        <div className="box" key={idx}>
+          Acquaintances
+        </div>
+      );
+    else if (rel.name !== "")
+      return (
+        <div className="box" key={idx}>
+          {rel.name}
+        </div>
+      );
+    return 0;
+  });
+
+  const strangerCards = stateFirst.stranger.map((rel, idx) => {
+    if (rel.name === "" && stateFirst.stranger.length === 1)
+      return (
+        <div className="box" key={idx}>
+          Strangers
+        </div>
+      );
+    else if (rel.name !== "")
+      return (
+        <div className="box" key={idx}>
+          {rel.name}
+        </div>
+      );
+    return 0;
   });
 
   const icons = Object.keys(state).map((key) => state[key]);
@@ -113,13 +146,19 @@ const Groups = ({
           <Col>
             <Row xs="4">{iconCards}</Row>
           </Col>
-          {stateFirst.isFamily && <Col>{familyCards}</Col>}
-          {!stateFirst.isFamily && (
+          {stateFirst.isColleague && <Col>{colleagueCards}</Col>}
+          {!stateFirst.isColleague && (
             <Col style={{ color: "red", textAlign: "justify" }}>
-              **You have not selected/specified any family entity. Please
+              **You have not selected/specified any colleague entity. Please
               continue to the next page.**
             </Col>
           )}
+
+          {/*stateFirst.isFamily && <div>{familyCards}</div>}
+          {stateFirst.isFriend && <div>{friendCards}</div>}
+          {/*stateFirst.isColleague && <div>{colleagueCards}</div>}
+          {stateFirst.isAcquaintance && <div>{acquaintanceCards}</div>}
+          {stateFirst.isStranger && <div>{strangerCards}</div>*/}
         </Row>
       </Container>
 
@@ -127,13 +166,13 @@ const Groups = ({
         style={{ marginTop: 3 + "em", marginBottom: 3 + "em" }}
         className="text-center"
       >
-        <Link to="/apppicker">
+        <Link to="/friend">
           <Button style={{ marginRight: 8 + "em" }} color="primary">
             Back
           </Button>
         </Link>
 
-        <Link to="/friend">
+        <Link to="/acquaintance">
           <Button style={{ marginLeft: 8 + "em" }} color="primary">
             Next
           </Button>
@@ -143,4 +182,4 @@ const Groups = ({
   );
 };
 
-export default Groups;
+export default Colleagues;

@@ -107,7 +107,7 @@ const AppPicker = ({
           </Button>
         </Link>
 
-        <Link to="/grouping">
+        <Link to="/family">
           <Button
             disabled={item.length === 0}
             style={{ marginLeft: 8 + "em" }}

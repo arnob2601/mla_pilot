@@ -3,15 +3,34 @@ import { Container, Row, Col, Button, Label } from "reactstrap";
 import { Link } from "react-router-dom";
 
 const Relation = ({ stateFirst, setStateFirst, group, setGroup, ...props }) => {
-
   const addRelation = () => {
     let x = {};
     stateFirst.family.map((f, idx) => {
-      x['family'+idx] = []
-    })
-    //console.log(setGroup);
-    setGroup({ ...group, ...x})
-  }
+      x["family" + idx] = [];
+      return 0;
+    });
+    setGroup({ ...group, ...x });
+    stateFirst.friends.map((f, idx) => {
+      x["friend" + idx] = [];
+      return 0;
+    });
+    setGroup({ ...group, ...x });
+    stateFirst.colleague.map((f, idx) => {
+      x["colleague" + idx] = [];
+      return 0;
+    });
+    setGroup({ ...group, ...x });
+    stateFirst.acquaintance.map((f, idx) => {
+      x["acquaintance" + idx] = [];
+      return 0;
+    });
+    setGroup({ ...group, ...x });
+    stateFirst.stranger.map((f, idx) => {
+      x["stranger" + idx] = [];
+      return 0;
+    });
+    setGroup({ ...group, ...x });
+  };
 
   const handleFamilyChange = (idx) => (e) => {
     const newShareUsers = stateFirst.family.map((shareUser, sidx) => {

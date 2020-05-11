@@ -6,6 +6,8 @@ import Welcome from "./welcome";
 import Trailer from "./trailer";
 import AppPicker from "./appPicker";
 import Groups from "./groups";
+import Friends from "./friend";
+import Colleagues from "./colleague";
 import Relation from "./relations";
 import "./App.css";
 
@@ -31,6 +33,8 @@ const App = () => {
     isStranger: false,
   });
   const [group, setGroup] = useState({});
+  //const [friend, setFriend] = useState({});
+  console.log(group);
   //const [ stateSecond, setStateSecond ] = useState( { password: '', checkpass: '', counter: 0, shareUsers: [{name: ''}] } );
   //const [ pass, setPass ] = useState({ password: '', checkpass: '', counter: 0});
   return (
@@ -69,9 +73,41 @@ const App = () => {
                   )}
                 />             
                 <Route
-                  path="/grouping"
+                  path="/family"
                   render={(props) => (
                     <Groups
+                      state={state}
+                      setState={setState}
+                      app={app}
+                      setApp={setApp}
+                      stateFirst={stateFirst}
+                      setStateFirst={setStateFirst}
+                      group={group}
+                      setGroup={setGroup}
+                      {...props}
+                    />
+                  )}
+                />
+                <Route
+                  path="/friend"
+                  render={(props) => (
+                    <Friends
+                      state={state}
+                      setState={setState}
+                      app={app}
+                      setApp={setApp}
+                      stateFirst={stateFirst}
+                      setStateFirst={setStateFirst}
+                      group={group}
+                      setGroup={setGroup}
+                      {...props}
+                    />
+                  )}
+                />
+                <Route
+                  path="/colleague"
+                  render={(props) => (
+                    <Colleagues
                       state={state}
                       setState={setState}
                       app={app}

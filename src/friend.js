@@ -3,7 +3,7 @@ import { Container, Row, Col } from "reactstrap";
 import { Link } from "react-router-dom";
 import { Card, CardImg, CardTitle, Button, Label } from "reactstrap";
 
-const Groups = ({
+const Friends = ({
   state,
   setState,
   app,
@@ -14,6 +14,7 @@ const Groups = ({
   setGroup,
   ...props
 }) => {
+  const indexTrack = stateFirst.family.length;
   const Apps = Object.keys(group).map((key) => group[key]);
   const selectedApps = Apps.map((x) =>
     x.map((icon, idx) => {
@@ -48,8 +49,8 @@ const Groups = ({
     e.preventDefault();
   };
 
-  const familyCards = stateFirst.family.map((rel, idx) => {
-    let text = "Family Members";
+  const friendCards = stateFirst.friends.map((rel, idx) => {
+    let text = "Friends";
     if (rel.name !== "") {
       text = rel.name;
     }
@@ -59,10 +60,10 @@ const Groups = ({
         onDragOver={dragOver}
         className="box"
         key={idx}
-        id={"family" + idx}
+        id={"friend" + idx}
       >
         <p className="text-center">{text}</p>
-        <Row xs="4">{selectedApps[idx]}</Row>
+        <Row xs="4">{selectedApps[idx+indexTrack]}</Row>
       </div>
     );
   });
@@ -113,10 +114,10 @@ const Groups = ({
           <Col>
             <Row xs="4">{iconCards}</Row>
           </Col>
-          {stateFirst.isFamily && <Col>{familyCards}</Col>}
-          {!stateFirst.isFamily && (
+          {stateFirst.isFriend && <Col>{friendCards}</Col>}
+          {!stateFirst.isFriend && (
             <Col style={{ color: "red", textAlign: "justify" }}>
-              **You have not selected/specified any family entity. Please
+              **You have not selected/specified any friend entity. Please
               continue to the next page.**
             </Col>
           )}
@@ -127,13 +128,13 @@ const Groups = ({
         style={{ marginTop: 3 + "em", marginBottom: 3 + "em" }}
         className="text-center"
       >
-        <Link to="/apppicker">
+        <Link to="/family">
           <Button style={{ marginRight: 8 + "em" }} color="primary">
             Back
           </Button>
         </Link>
 
-        <Link to="/friend">
+        <Link to="/colleague">
           <Button style={{ marginLeft: 8 + "em" }} color="primary">
             Next
           </Button>
@@ -143,4 +144,4 @@ const Groups = ({
   );
 };
 
-export default Groups;
+export default Friends;
