@@ -3,18 +3,18 @@ import { Container, Row, Col } from "reactstrap";
 import { Link } from "react-router-dom";
 import { Card, CardImg, CardTitle, Button, Label } from "reactstrap";
 
-const Groups = ({
+const Acquaintance = ({
   state,
   setState,
   app,
   setApp,
   stateFirst,
   setStateFirst,
-  group,
-  setGroup,
+  acquaintance,
+  setAcquaintance,
   ...props
 }) => {
-  const Apps = Object.keys(group).map((key) => group[key]);
+  const Apps = Object.keys(acquaintance).map((key) => acquaintance[key]);
   const selectedApps = Apps.map((x) =>
     x.map((icon, idx) => {
       return (
@@ -34,11 +34,11 @@ const Groups = ({
     e.preventDefault();
     const data = JSON.parse(e.dataTransfer.getData("card"));
     const idx = e.currentTarget.id;
-    setGroup({
-      ...group,
+    setAcquaintance({
+      ...acquaintance,
       [idx]: [
         ...new Map(
-          group[idx].concat([data]).map((item) => [item.id, item])
+            acquaintance[idx].concat([data]).map((item) => [item.id, item])
         ).values(),
       ], //Setting only unique values to a shared entity
     });
@@ -48,8 +48,8 @@ const Groups = ({
     e.preventDefault();
   };
 
-  const familyCards = stateFirst.family.map((rel, idx) => {
-    let text = "Family Members";
+  const acquaintanceCards = stateFirst.acquaintance.map((rel, idx) => {
+    let text = "Acquaintance";
     if (rel.name !== "") {
       text = rel.name;
     }
@@ -59,7 +59,7 @@ const Groups = ({
         onDragOver={dragOver}
         className="box"
         key={idx}
-        id={"family" + idx}
+        id={"acquaintance" + idx}
       >
         <p className="text-center">{text}</p>
         <Row xs="4">{selectedApps[idx]}</Row>
@@ -113,10 +113,10 @@ const Groups = ({
           <Col>
             <Row xs="4">{iconCards}</Row>
           </Col>
-          {stateFirst.isFamily && <Col>{familyCards}</Col>}
-          {!stateFirst.isFamily && (
+          {stateFirst.isAcquaintance && <Col>{acquaintanceCards}</Col>}
+          {!stateFirst.isAcquaintance && (
             <Col style={{ color: "red", textAlign: "justify" }}>
-              **You have not selected/specified any family entity. Please
+              **You have not selected/specified any acquaintance entity. Please
               continue to the next page.**
             </Col>
           )}
@@ -127,13 +127,13 @@ const Groups = ({
         style={{ marginTop: 3 + "em", marginBottom: 3 + "em" }}
         className="text-center"
       >
-        <Link to="/apppicker">
+        <Link to="/colleague">
           <Button style={{ marginRight: 8 + "em" }} color="primary">
             Back
           </Button>
         </Link>
 
-        <Link to="/friend">
+        <Link to="/stranger">
           <Button style={{ marginLeft: 8 + "em" }} color="primary">
             Next
           </Button>
@@ -143,4 +143,4 @@ const Groups = ({
   );
 };
 
-export default Groups;
+export default Acquaintance;

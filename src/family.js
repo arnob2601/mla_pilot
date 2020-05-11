@@ -3,18 +3,18 @@ import { Container, Row, Col } from "reactstrap";
 import { Link } from "react-router-dom";
 import { Card, CardImg, CardTitle, Button, Label } from "reactstrap";
 
-const Friends = ({
+const Family = ({
   state,
   setState,
   app,
   setApp,
   stateFirst,
   setStateFirst,
-  friend,
-  setFriend,
+  family,
+  setFamily,
   ...props
 }) => {
-  const Apps = Object.keys(friend).map((key) => friend[key]);
+  const Apps = Object.keys(family).map((key) => family[key]);
   const selectedApps = Apps.map((x) =>
     x.map((icon, idx) => {
       return (
@@ -34,11 +34,11 @@ const Friends = ({
     e.preventDefault();
     const data = JSON.parse(e.dataTransfer.getData("card"));
     const idx = e.currentTarget.id;
-    setFriend({
-      ...friend,
+    setFamily({
+      ...family,
       [idx]: [
         ...new Map(
-          friend[idx].concat([data]).map((item) => [item.id, item])
+          family[idx].concat([data]).map((item) => [item.id, item])
         ).values(),
       ], //Setting only unique values to a shared entity
     });
@@ -48,8 +48,8 @@ const Friends = ({
     e.preventDefault();
   };
 
-  const friendCards = stateFirst.friends.map((rel, idx) => {
-    let text = "Friends";
+  const familyCards = stateFirst.family.map((rel, idx) => {
+    let text = "Family Members";
     if (rel.name !== "") {
       text = rel.name;
     }
@@ -59,7 +59,7 @@ const Friends = ({
         onDragOver={dragOver}
         className="box"
         key={idx}
-        id={"friend" + idx}
+        id={"family" + idx}
       >
         <p className="text-center">{text}</p>
         <Row xs="4">{selectedApps[idx]}</Row>
@@ -113,10 +113,10 @@ const Friends = ({
           <Col>
             <Row xs="4">{iconCards}</Row>
           </Col>
-          {stateFirst.isFriend && <Col>{friendCards}</Col>}
-          {!stateFirst.isFriend && (
+          {stateFirst.isFamily && <Col>{familyCards}</Col>}
+          {!stateFirst.isFamily && (
             <Col style={{ color: "red", textAlign: "justify" }}>
-              **You have not selected/specified any friend entity. Please
+              **You have not selected/specified any family entity. Please
               continue to the next page.**
             </Col>
           )}
@@ -127,13 +127,13 @@ const Friends = ({
         style={{ marginTop: 3 + "em", marginBottom: 3 + "em" }}
         className="text-center"
       >
-        <Link to="/family">
+        <Link to="/apppicker">
           <Button style={{ marginRight: 8 + "em" }} color="primary">
             Back
           </Button>
         </Link>
 
-        <Link to="/colleague">
+        <Link to="/friend">
           <Button style={{ marginLeft: 8 + "em" }} color="primary">
             Next
           </Button>
@@ -143,4 +143,4 @@ const Friends = ({
   );
 };
 
-export default Friends;
+export default Family;

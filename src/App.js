@@ -3,12 +3,14 @@ import { Container, Row, Col } from "reactstrap";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { icons } from "./icons";
 import Welcome from "./welcome";
-import Trailer from "./trailer";
+//import Trailer from "./trailer";
+import Relation from "./relations";
 import AppPicker from "./appPicker";
-import Groups from "./groups";
+import Family from "./family";
 import Friends from "./friend";
 import Colleagues from "./colleague";
-import Relation from "./relations";
+import Acquaintance from "./acquaintance";
+import Stranger from "./stranger";
 import "./App.css";
 
 
@@ -32,10 +34,12 @@ const App = () => {
     isAcquaintance: false,
     isStranger: false,
   });
-  const [group, setGroup] = useState({});
-  //const [friend, setFriend] = useState({});
-  console.log(group);
-  //const [ stateSecond, setStateSecond ] = useState( { password: '', checkpass: '', counter: 0, shareUsers: [{name: ''}] } );
+  const [family, setFamily] = useState({});
+  const [friend, setFriend] = useState({});
+  const [colleague, setColleague] = useState({});
+  const [acquaintance, setAcquaintance] = useState({});
+  const [stranger, setStranger] = useState({});
+  //console.log(friend);
   //const [ pass, setPass ] = useState({ password: '', checkpass: '', counter: 0});
   return (
     <div>
@@ -45,15 +49,23 @@ const App = () => {
             <Router>
               <Switch>
                 <Route path="/" exact component={Welcome} />
-                <Route path="/trailer" component={Trailer} />
+                {/*<Route path="/trailer" component={Trailer} />*/}
                 <Route
                   path="/sharing"
                   render={(props) => (
                     <Relation
                       stateFirst={stateFirst}
                       setStateFirst={setStateFirst}
-                      group={group}
-                      setGroup={setGroup}
+                      family={family}
+                      setFamily={setFamily}
+                      friend={friend}
+                      setFriend={setFriend}
+                      colleague={colleague}
+                      setColleague={setColleague}
+                      acquaintance={acquaintance}
+                      setAcquaintance={setAcquaintance}
+                      stranger={stranger}
+                      setStranger={setStranger}
                       {...props}
                     />
                   )}
@@ -75,15 +87,15 @@ const App = () => {
                 <Route
                   path="/family"
                   render={(props) => (
-                    <Groups
+                    <Family
                       state={state}
                       setState={setState}
                       app={app}
                       setApp={setApp}
                       stateFirst={stateFirst}
                       setStateFirst={setStateFirst}
-                      group={group}
-                      setGroup={setGroup}
+                      family={family}
+                      setFamily={setFamily}
                       {...props}
                     />
                   )}
@@ -98,8 +110,8 @@ const App = () => {
                       setApp={setApp}
                       stateFirst={stateFirst}
                       setStateFirst={setStateFirst}
-                      group={group}
-                      setGroup={setGroup}
+                      friend={friend}
+                      setFriend={setFriend}
                       {...props}
                     />
                   )}
@@ -114,8 +126,40 @@ const App = () => {
                       setApp={setApp}
                       stateFirst={stateFirst}
                       setStateFirst={setStateFirst}
-                      group={group}
-                      setGroup={setGroup}
+                      colleague={colleague}
+                      setColleague={setColleague}
+                      {...props}
+                    />
+                  )}
+                />
+                <Route
+                  path="/acquaintance"
+                  render={(props) => (
+                    <Acquaintance
+                      state={state}
+                      setState={setState}
+                      app={app}
+                      setApp={setApp}
+                      stateFirst={stateFirst}
+                      setStateFirst={setStateFirst}
+                      acquaintance={acquaintance}
+                      setAcquaintance={setAcquaintance}
+                      {...props}
+                    />
+                  )}
+                />
+                <Route
+                  path="/stranger"
+                  render={(props) => (
+                    <Stranger
+                      state={state}
+                      setState={setState}
+                      app={app}
+                      setApp={setApp}
+                      stateFirst={stateFirst}
+                      setStateFirst={setStateFirst}
+                      stranger={stranger}
+                      setStranger={setStranger}
                       {...props}
                     />
                   )}

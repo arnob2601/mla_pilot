@@ -2,34 +2,56 @@ import React from "react";
 import { Container, Row, Col, Button, Label } from "reactstrap";
 import { Link } from "react-router-dom";
 
-const Relation = ({ stateFirst, setStateFirst, group, setGroup, ...props }) => {
+const Relation = ({
+  stateFirst,
+  setStateFirst,
+  family,
+  setFamily,
+  friend,
+  setFriend,
+  colleague,
+  setColleague,
+  acquaintance,
+  setAcquaintance,
+  stranger,
+  setStranger,
+  ...props
+}) => {
   const addRelation = () => {
-    let x = {};
+    let x1 = {};
+    let x2 = {};
+    let x3 = {};
+    let x4 = {};
+    let x5 = {};
     stateFirst.family.map((f, idx) => {
-      x["family" + idx] = [];
+      x1["family" + idx] = [];
       return 0;
     });
-    setGroup({ ...group, ...x });
+    setFamily({ ...family, ...x1 });
+
     stateFirst.friends.map((f, idx) => {
-      x["friend" + idx] = [];
+      x2["friend" + idx] = [];
       return 0;
     });
-    setGroup({ ...group, ...x });
+    setFriend({ ...friend, ...x2 });
+
     stateFirst.colleague.map((f, idx) => {
-      x["colleague" + idx] = [];
+      x3["colleague" + idx] = [];
       return 0;
     });
-    setGroup({ ...group, ...x });
+    setColleague({ ...colleague, ...x3 });
+
     stateFirst.acquaintance.map((f, idx) => {
-      x["acquaintance" + idx] = [];
+      x4["acquaintance" + idx] = [];
       return 0;
     });
-    setGroup({ ...group, ...x });
+    setAcquaintance({ ...acquaintance, ...x4 });
+
     stateFirst.stranger.map((f, idx) => {
-      x["stranger" + idx] = [];
+      x5["stranger" + idx] = [];
       return 0;
     });
-    setGroup({ ...group, ...x });
+    setStranger({ ...stranger, ...x5 });
   };
 
   const handleFamilyChange = (idx) => (e) => {

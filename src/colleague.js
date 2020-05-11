@@ -10,12 +10,11 @@ const Colleagues = ({
   setApp,
   stateFirst,
   setStateFirst,
-  group,
-  setGroup,
+  colleague,
+  setColleague,
   ...props
 }) => {
-  const indexTrack = stateFirst.family.length+stateFirst.friends.length;
-  const Apps = Object.keys(group).map((key) => group[key]);
+  const Apps = Object.keys(colleague).map((key) => colleague[key]);
   const selectedApps = Apps.map((x) =>
     x.map((icon, idx) => {
       return (
@@ -35,11 +34,11 @@ const Colleagues = ({
     e.preventDefault();
     const data = JSON.parse(e.dataTransfer.getData("card"));
     const idx = e.currentTarget.id;
-    setGroup({
-      ...group,
+    setColleague({
+      ...colleague,
       [idx]: [
         ...new Map(
-          group[idx].concat([data]).map((item) => [item.id, item])
+            colleague[idx].concat([data]).map((item) => [item.id, item])
         ).values(),
       ], //Setting only unique values to a shared entity
     });
@@ -63,41 +62,9 @@ const Colleagues = ({
         id={"colleague" + idx}
       >
         <p className="text-center">{text}</p>
-        <Row xs="4">{selectedApps[idx+indexTrack]}</Row>
+        <Row xs="4">{selectedApps[idx]}</Row>
       </div>
     );
-  });
-
-  const acquaintanceCards = stateFirst.acquaintance.map((rel, idx) => {
-    if (rel.name === "" && stateFirst.acquaintance.length === 1)
-      return (
-        <div className="box" key={idx}>
-          Acquaintances
-        </div>
-      );
-    else if (rel.name !== "")
-      return (
-        <div className="box" key={idx}>
-          {rel.name}
-        </div>
-      );
-    return 0;
-  });
-
-  const strangerCards = stateFirst.stranger.map((rel, idx) => {
-    if (rel.name === "" && stateFirst.stranger.length === 1)
-      return (
-        <div className="box" key={idx}>
-          Strangers
-        </div>
-      );
-    else if (rel.name !== "")
-      return (
-        <div className="box" key={idx}>
-          {rel.name}
-        </div>
-      );
-    return 0;
   });
 
   const icons = Object.keys(state).map((key) => state[key]);
@@ -153,12 +120,6 @@ const Colleagues = ({
               continue to the next page.**
             </Col>
           )}
-
-          {/*stateFirst.isFamily && <div>{familyCards}</div>}
-          {stateFirst.isFriend && <div>{friendCards}</div>}
-          {/*stateFirst.isColleague && <div>{colleagueCards}</div>}
-          {stateFirst.isAcquaintance && <div>{acquaintanceCards}</div>}
-          {stateFirst.isStranger && <div>{strangerCards}</div>*/}
         </Row>
       </Container>
 
