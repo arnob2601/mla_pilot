@@ -14,6 +14,19 @@ const Stranger = ({
   setStranger,
   ...props
 }) => {
+  const pushData = () => {
+    if (stateFirst.isStranger) {
+      for (let i = 0; i < Apps.length; i++) {
+        for (let j = 0; j < Apps[i].length; j++) {
+          //console.log(stateFirst.family[i].name, Apps[i][j].title)
+          fetch(
+            `http://localhost:4000/stranger/add?user=${stateFirst.user}&sharee=${stateFirst.stranger[i].name}&app=${Apps[i][j].title}`
+          ).catch((err) => console.error(err));
+        }
+      }
+    }
+  };
+
   const Apps = Object.keys(stranger).map((key) => stranger[key]);
   const selectedApps = Apps.map((x) =>
     x.map((icon, idx) => {
@@ -134,7 +147,7 @@ const Stranger = ({
         </Link>
 
         <Link to="/pass">
-          <Button style={{ marginLeft: 8 + "em" }} color="primary">
+          <Button style={{ marginLeft: 8 + "em" }} color="primary" onClick={pushData}>
             Next
           </Button>
         </Link>

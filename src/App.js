@@ -21,7 +21,7 @@ const App = () => {
   const [app, setApp] = useState(icons);
   const [stateFirst, setStateFirst] = useState({
     name: "",
-    password: "",
+    user: "test",
     checkpass: "",
     counter: 0,
     family: [{ name: "" }],
@@ -41,7 +41,7 @@ const App = () => {
   const [acquaintance, setAcquaintance] = useState({});
   const [stranger, setStranger] = useState({});
   const [password, setPassword] = useState({});
-  console.log(password);
+  console.log(family);
   //const [ pass, setPass ] = useState({ password: '', checkpass: '', counter: 0});
   return (
     <div>

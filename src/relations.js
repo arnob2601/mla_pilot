@@ -3,6 +3,8 @@ import { Container, Row, Col, Button, Label } from "reactstrap";
 import { Link } from "react-router-dom";
 import "./App.css";
 
+const entity = ["Family", "Friend", "Colleague", "Acquaintance", "Stranger"];
+
 const Relation = ({
   stateFirst,
   setStateFirst,
@@ -18,6 +20,80 @@ const Relation = ({
   setStranger,
   ...props
 }) => {
+  /*Relations insertion to database*/
+  const pushFamilyData = (x) => {
+    fetch(
+      `http://localhost:4000/relation/add?user=${stateFirst.user}&entity=${entity[0]}&sharee=${x}`
+    ).catch((err) => console.error(err));
+  };
+
+  const pushFriendData = (x) => {
+    fetch(
+      `http://localhost:4000/relation/add?user=${stateFirst.user}&entity=${entity[1]}&sharee=${x}`
+    ).catch((err) => console.error(err));
+  };
+
+  const pushColleagueData = (x) => {
+    fetch(
+      `http://localhost:4000/relation/add?user=${stateFirst.user}&entity=${entity[2]}&sharee=${x}`
+    ).catch((err) => console.error(err));
+  };
+
+  const pushAcquaintanceData = (x) => {
+    fetch(
+      `http://localhost:4000/relation/add?user=${stateFirst.user}&entity=${entity[3]}&sharee=${x}`
+    ).catch((err) => console.error(err));
+  };
+
+  const pushStrangerData = (x) => {
+    fetch(
+      `http://localhost:4000/relation/add?user=${stateFirst.user}&entity=${entity[4]}&sharee=${x}`
+    ).catch((err) => console.error(err));
+  };
+
+  const pushData = () => {
+    if (stateFirst.isFamily) {
+      stateFirst.family.map((f, idx) => {
+        if (f.name !== "") pushFamilyData(f.name);
+        else pushFamilyData(entity[0]);
+        return 0;
+      });
+    }
+
+    if (stateFirst.isFriend) {
+      stateFirst.friends.map((f, idx) => {
+        if (f.name !== "") pushFriendData(f.name);
+        else pushFriendData(entity[1]);
+        return 0;
+      });
+    }
+
+    if (stateFirst.isColleague) {
+      stateFirst.colleague.map((f, idx) => {
+        if (f.name !== "") pushColleagueData(f.name);
+        else pushColleagueData(entity[2]);
+        return 0;
+      });
+    }
+
+    if (stateFirst.isAcquaintance) {
+      stateFirst.acquaintance.map((f, idx) => {
+        if (f.name !== "") pushAcquaintanceData(f.name);
+        else pushAcquaintanceData(entity[3]);
+        return 0;
+      });
+    }
+
+    if (stateFirst.isStranger) {
+      stateFirst.stranger.map((f, idx) => {
+        if (f.name !== "") pushStrangerData(f.name);
+        else pushStrangerData(entity[4]);
+        return 0;
+      });
+    }
+  };
+
+  /*Submit Button Method*/
   const addRelation = () => {
     let x1 = {};
     let x2 = {};
@@ -53,6 +129,8 @@ const Relation = ({
       return 0;
     });
     setStranger({ ...stranger, ...x5 });
+
+    pushData();
   };
 
   const handleFamilyChange = (idx) => (e) => {
@@ -164,26 +242,26 @@ const Relation = ({
       stranger: stateFirst.stranger.concat([{ name: "" }]),
     });
   };
-  
+
   const selFam = () => {
-    if(stateFirst.isFamily) return (<span>family members,</span>)
-  }
+    if (stateFirst.isFamily) return <span>family members,</span>;
+  };
 
   const selFri = () => {
-    if(stateFirst.isFriend) return (<span>friends,</span>)
-  }
+    if (stateFirst.isFriend) return <span>friends,</span>;
+  };
 
   const selCol = () => {
-    if(stateFirst.isColleague) return (<span>colleagues,</span>)
-  }
+    if (stateFirst.isColleague) return <span>colleagues,</span>;
+  };
 
   const selAcq = () => {
-    if(stateFirst.isAcquaintance) return (<span>acquaintances,</span>)
-  }
+    if (stateFirst.isAcquaintance) return <span>acquaintances,</span>;
+  };
 
   const selStr = () => {
-    if(stateFirst.isStranger) return (<span>strangers</span>)
-  }
+    if (stateFirst.isStranger) return <span>strangers</span>;
+  };
 
   return (
     <div
@@ -202,8 +280,8 @@ const Relation = ({
           stateFirst.isAcquaintance ||
           stateFirst.isStranger) && (
           <p style={{ color: "red", textAlign: "justify" }}>
-            **You can add more specific relation(s) under {selFam()} {selFri()} {selCol()} {selAcq()} {selStr()} entity
-            for your convenience.**
+            **You can add more specific relation(s) under {selFam()} {selFri()}{" "}
+            {selCol()} {selAcq()} {selStr()} entity for your convenience.**
           </p>
         )}
 
@@ -223,7 +301,7 @@ const Relation = ({
                     setStateFirst({
                       ...stateFirst,
                       isFamily: false,
-                      family: [{name:''}],
+                      family: [{ name: "" }],
                     });
                   }
                 }}
@@ -242,9 +320,9 @@ const Relation = ({
                       onChange={handleFamilyChange(idx)}
                     />
                     <button
-                    className="myButton"
+                      className="myButton"
                       onClick={handleRemoveFamily(idx)}
-                      disabled={stateFirst.family.length===1}
+                      disabled={stateFirst.family.length === 1}
                     >
                       Remove
                     </button>
@@ -274,7 +352,7 @@ const Relation = ({
                     setStateFirst({
                       ...stateFirst,
                       isFriend: false,
-                      friends: [{name:''}],
+                      friends: [{ name: "" }],
                     });
                   }
                 }}
@@ -283,7 +361,7 @@ const Relation = ({
             </Label>
             {stateFirst.isFriend === true && (
               <div>
-                                {stateFirst.friends.map((shareUser, idx) => (
+                {stateFirst.friends.map((shareUser, idx) => (
                   <div key={idx}>
                     <input
                       style={{ width: 250 }}
@@ -295,7 +373,7 @@ const Relation = ({
                     <button
                       onClick={handleRemoveFriend(idx)}
                       style={{ width: 75, background: "red", color: "white" }}
-                      disabled={stateFirst.friends.length===1}
+                      disabled={stateFirst.friends.length === 1}
                     >
                       Remove
                     </button>
@@ -328,7 +406,7 @@ const Relation = ({
                     setStateFirst({
                       ...stateFirst,
                       isColleague: false,
-                      colleague: [{name:''}],
+                      colleague: [{ name: "" }],
                     });
                   }
                 }}
@@ -337,7 +415,6 @@ const Relation = ({
             </Label>
             {stateFirst.isColleague === true && (
               <div>
-                
                 {stateFirst.colleague.map((shareUser, idx) => (
                   <div key={idx}>
                     <input
@@ -350,7 +427,7 @@ const Relation = ({
                     <button
                       onClick={handleRemoveColleague(idx)}
                       style={{ width: 75, background: "red", color: "white" }}
-                      disabled={stateFirst.colleague.length===1}
+                      disabled={stateFirst.colleague.length === 1}
                     >
                       Remove
                     </button>
@@ -380,7 +457,7 @@ const Relation = ({
                     setStateFirst({
                       ...stateFirst,
                       isAcquaintance: false,
-                      acquaintance: [{name:''}],
+                      acquaintance: [{ name: "" }],
                     });
                   }
                 }}
@@ -389,7 +466,6 @@ const Relation = ({
             </Label>
             {stateFirst.isAcquaintance === true && (
               <div>
-                
                 {stateFirst.acquaintance.map((shareUser, idx) => (
                   <div key={idx}>
                     <input
@@ -402,7 +478,7 @@ const Relation = ({
                     <button
                       onClick={handleRemoveAcquaintance(idx)}
                       style={{ width: 75, background: "red", color: "white" }}
-                      disabled={stateFirst.acquaintance.length===1}
+                      disabled={stateFirst.acquaintance.length === 1}
                     >
                       Remove
                     </button>
@@ -435,7 +511,7 @@ const Relation = ({
                     setStateFirst({
                       ...stateFirst,
                       isStranger: false,
-                      stranger: [{name:''}],
+                      stranger: [{ name: "" }],
                     });
                   }
                 }}
@@ -444,7 +520,6 @@ const Relation = ({
             </Label>
             {stateFirst.isStranger === true && (
               <div>
-                
                 {stateFirst.stranger.map((shareUser, idx) => (
                   <div key={idx}>
                     <input
@@ -457,7 +532,7 @@ const Relation = ({
                     <button
                       onClick={handleRemoveStranger(idx)}
                       style={{ width: 75, background: "red", color: "white" }}
-                      disabled={stateFirst.stranger.length===1}
+                      disabled={stateFirst.stranger.length === 1}
                     >
                       Remove
                     </button>

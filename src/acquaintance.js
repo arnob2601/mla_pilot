@@ -14,6 +14,19 @@ const Acquaintance = ({
   setAcquaintance,
   ...props
 }) => {
+  const pushData = () => {
+    if (stateFirst.isAcquaintance) {
+      for (let i = 0; i < Apps.length; i++) {
+        for (let j = 0; j < Apps[i].length; j++) {
+          //console.log(stateFirst.family[i].name, Apps[i][j].title)
+          fetch(
+            `http://localhost:4000/acquaintance/add?user=${stateFirst.user}&sharee=${stateFirst.acquaintance[i].name}&app=${Apps[i][j].title}`
+          ).catch((err) => console.error(err));
+        }
+      }
+    }
+  };
+
   const Apps = Object.keys(acquaintance).map((key) => acquaintance[key]);
   const selectedApps = Apps.map((x) =>
     x.map((icon, idx) => {
@@ -134,7 +147,7 @@ const Acquaintance = ({
         </Link>
 
         <Link to="/stranger">
-          <Button style={{ marginLeft: 8 + "em" }} color="primary">
+          <Button style={{ marginLeft: 8 + "em" }} color="primary" onClick={pushData}>
             Next
           </Button>
         </Link>

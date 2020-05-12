@@ -14,6 +14,20 @@ const Family = ({
   setFamily,
   ...props
 }) => {
+  /*Selected apps for family insertion to database*/
+  const pushData = () => {
+    if (stateFirst.isFamily) {
+      for (let i = 0; i < Apps.length; i++) {
+        for (let j = 0; j < Apps[i].length; j++) {
+          //console.log(stateFirst.family[i].name, Apps[i][j].title)
+          fetch(
+            `http://localhost:4000/family/add?user=${stateFirst.user}&sharee=${stateFirst.family[i].name}&app=${Apps[i][j].title}`
+          ).catch((err) => console.error(err));
+        }
+      }
+    }
+  };
+
   const Apps = Object.keys(family).map((key) => family[key]);
   const selectedApps = Apps.map((x) =>
     x.map((icon, idx) => {
@@ -134,7 +148,11 @@ const Family = ({
         </Link>
 
         <Link to="/friend">
-          <Button style={{ marginLeft: 8 + "em" }} color="primary">
+          <Button
+            style={{ marginLeft: 8 + "em" }}
+            color="primary"
+            onClick={pushData}
+          >
             Next
           </Button>
         </Link>

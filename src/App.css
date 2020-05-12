@@ -23,7 +23,7 @@
 
 .myButton :disabled {
   background: #666666;
-  color: #303030
+  color: #303030;
 }
 
 .myButton :enabled {

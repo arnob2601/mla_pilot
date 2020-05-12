@@ -14,6 +14,20 @@ const Friends = ({
   setFriend,
   ...props
 }) => {
+  /*Selected apps for friend insertion to database*/
+  const pushData = () => {
+    if (stateFirst.isFriend) {
+      for (let i = 0; i < Apps.length; i++) {
+        for (let j = 0; j < Apps[i].length; j++) {
+          //console.log(stateFirst.family[i].name, Apps[i][j].title)
+          fetch(
+            `http://localhost:4000/friend/add?user=${stateFirst.user}&sharee=${stateFirst.friends[i].name}&app=${Apps[i][j].title}`
+          ).catch((err) => console.error(err));
+        }
+      }
+    }
+  };
+
   const Apps = Object.keys(friend).map((key) => friend[key]);
   const selectedApps = Apps.map((x) =>
     x.map((icon, idx) => {
@@ -134,7 +148,7 @@ const Friends = ({
         </Link>
 
         <Link to="/colleague">
-          <Button style={{ marginLeft: 8 + "em" }} color="primary">
+          <Button style={{ marginLeft: 8 + "em" }} color="primary" onClick={pushData}>
             Next
           </Button>
         </Link>
