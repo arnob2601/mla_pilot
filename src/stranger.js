@@ -133,7 +133,7 @@ const Stranger = ({
           </Button>
         </Link>
 
-        <Link to="/summary">
+        <Link to="/pass">
           <Button style={{ marginLeft: 8 + "em" }} color="primary">
             Next
           </Button>

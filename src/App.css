@@ -14,3 +14,18 @@
   padding: 1em 2em;
   margin-top: 2em;
 }
+
+.myButton {
+  width: 75;
+  background: #ff0000;
+  color: #ffffff;
+}
+
+.myButton :disabled {
+  background: #666666;
+  color: #303030
+}
+
+.myButton :enabled {
+  background: #ff0000;
+}

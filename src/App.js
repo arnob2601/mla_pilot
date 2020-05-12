@@ -11,6 +11,7 @@ import Friends from "./friend";
 import Colleagues from "./colleague";
 import Acquaintance from "./acquaintance";
 import Stranger from "./stranger";
+import Password from "./pass";
 import "./App.css";
 
 
@@ -39,7 +40,8 @@ const App = () => {
   const [colleague, setColleague] = useState({});
   const [acquaintance, setAcquaintance] = useState({});
   const [stranger, setStranger] = useState({});
-  //console.log(friend);
+  const [password, setPassword] = useState({});
+  console.log(password);
   //const [ pass, setPass ] = useState({ password: '', checkpass: '', counter: 0});
   return (
     <div>
@@ -160,6 +162,18 @@ const App = () => {
                       setStateFirst={setStateFirst}
                       stranger={stranger}
                       setStranger={setStranger}
+                      {...props}
+                    />
+                  )}
+                />
+                <Route
+                  path="/pass"
+                  render={(props) => (
+                    <Password
+                      stateFirst={stateFirst}
+                      setStateFirst={setStateFirst}
+                      password={password}
+                      setPassword={setPassword}
                       {...props}
                     />
                   )}
