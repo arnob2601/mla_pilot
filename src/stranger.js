@@ -3,6 +3,9 @@ import { Container, Row, Col } from "reactstrap";
 import { Link } from "react-router-dom";
 import { Card, CardImg, CardTitle, Button, Label } from "reactstrap";
 
+const address = [ "/family", "/friend", "/colleague", "/acquaintance", "/stranger", "/pass", "/apppicker" ];
+let back='';
+
 const Stranger = ({
   state,
   setState,
@@ -14,6 +17,12 @@ const Stranger = ({
   setStranger,
   ...props
 }) => {
+  if(stateFirst.isAcquaintance) back=address[3];
+  else if(stateFirst.isColleague) back=address[2];
+  else if(stateFirst.isFriend) back=address[1];
+  else if(stateFirst.isFamily) back=address[0];
+  else back=address[6];
+  
   const pushData = () => {
     if (stateFirst.isStranger) {
       for (let i = 0; i < Apps.length; i++) {
@@ -127,12 +136,6 @@ const Stranger = ({
             <Row xs="4">{iconCards}</Row>
           </Col>
           {stateFirst.isStranger && <Col>{strangerCards}</Col>}
-          {!stateFirst.isStranger && (
-            <Col style={{ color: "red", textAlign: "justify" }}>
-              **You have not selected/specified any acquaintance entity. Please
-              continue to the next page.**
-            </Col>
-          )}
         </Row>
       </Container>
 
@@ -140,7 +143,7 @@ const Stranger = ({
         style={{ marginTop: 3 + "em", marginBottom: 3 + "em" }}
         className="text-center"
       >
-        <Link to="/acquaintance">
+        <Link to={back}>
           <Button style={{ marginRight: 8 + "em" }} color="primary">
             Back
           </Button>

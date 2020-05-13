@@ -3,6 +3,9 @@ import { Container, Row, Col } from "reactstrap";
 import { Link } from "react-router-dom";
 import { Card, CardImg, CardTitle, Button, Label } from "reactstrap";
 
+const address = [ "/family", "/friend", "/colleague", "/acquaintance", "/stranger", "/pass" ]
+let next='';
+
 const Family = ({
   state,
   setState,
@@ -14,6 +17,12 @@ const Family = ({
   setFamily,
   ...props
 }) => {
+  if(stateFirst.isFriend) next=address[1];
+  else if(stateFirst.isColleague) next=address[2];
+  else if(stateFirst.isAcquaintance) next=address[3];
+  else if(stateFirst.isStranger) next=address[4];
+  else next=address[5];
+
   /*Selected apps for family insertion to database*/
   const pushData = () => {
     if (stateFirst.isFamily) {
@@ -109,6 +118,7 @@ const Family = ({
     );
   });
 
+  //if(stateFirst.isFamily === false) return <Redirect to="/friend"/>
   return (
     <div>
       <Container fluid>
@@ -128,12 +138,6 @@ const Family = ({
             <Row xs="4">{iconCards}</Row>
           </Col>
           {stateFirst.isFamily && <Col>{familyCards}</Col>}
-          {!stateFirst.isFamily && (
-            <Col style={{ color: "red", textAlign: "justify" }}>
-              **You have not selected/specified any family entity. Please
-              continue to the next page.**
-            </Col>
-          )}
         </Row>
       </Container>
 
@@ -147,7 +151,7 @@ const Family = ({
           </Button>
         </Link>
 
-        <Link to="/friend">
+        <Link to={next}>
           <Button
             style={{ marginLeft: 8 + "em" }}
             color="primary"

@@ -15,7 +15,6 @@ import Password from "./pass";
 import Finish from "./finish";
 import "./App.css";
 
-
 //function App(){
 const App = () => {
   const [state, setState] = useState({});
@@ -84,7 +83,7 @@ const App = () => {
                       {...props}
                     />
                   )}
-                />             
+                />
                 <Route
                   path="/family"
                   render={(props) => (

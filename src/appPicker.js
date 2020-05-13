@@ -3,6 +3,9 @@ import { Container, Row, Col } from "reactstrap";
 import { Link } from "react-router-dom";
 import { Card, CardImg, CardTitle, Button, Label } from "reactstrap";
 
+const address = [ "/family", "/friend", "/colleague", "/acquaintance", "/stranger", "/pass" ]
+let next='';
+
 const AppPicker = ({
   state,
   setState,
@@ -12,6 +15,12 @@ const AppPicker = ({
   setStateFirst,
   ...props
 }) => {
+  if(stateFirst.isFamily) next=address[0];
+  else if(stateFirst.isFriend) next=address[1];
+  else if(stateFirst.isColleague) next=address[2];
+  else if(stateFirst.isAcquaintance) next=address[3];
+  else if(stateFirst.isStranger) next=address[4];
+
   const item = Object.keys(state).map((key) => app[key]);
 
   const handleName = (e) => {
@@ -107,7 +116,7 @@ const AppPicker = ({
           </Button>
         </Link>
 
-        <Link to="/family">
+        <Link to={next}>
           <Button
             disabled={item.length === 0}
             style={{ marginLeft: 8 + "em" }}

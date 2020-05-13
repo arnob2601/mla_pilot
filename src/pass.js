@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import "./App.css";
 
 const entity = ["Family", "Friend", "Colleague", "Acquaintance", "Stranger"];
+const address = [ "/family", "/friend", "/colleague", "/acquaintance", "/stranger", "/pass" ];
+let back='';
 
 const Password = ({
   stateFirst,
@@ -12,6 +14,12 @@ const Password = ({
   setPassword,
   ...props
 }) => {
+  if(stateFirst.isStranger) back=address[4];
+  else if(stateFirst.isAcquaintance) back=address[3];
+  else if(stateFirst.isColleague) back=address[2];
+  else if(stateFirst.isFriend) back=address[1];
+  else if(stateFirst.isFamily) back=address[0];
+
   const pushData = () => {
     if (stateFirst.isFamily) {
       stateFirst.family.map((rel, idx) => {
@@ -198,10 +206,9 @@ const Password = ({
     <div>
       <Container fluid>
         <p className="para">
-          Please set password for each of the shared entites along with the
-          specific relations that you may have defined wihtin them. The
-          passwords you set for any shared entitity or specific relation must be
-          atleast four characters long.
+          Please set a password for each of the shared entities along with the specific relations 
+          that you may have defined within them. The passwords you set for any shared entity or 
+          specific relation must be at least four characters long.
         </p>
         <Row xs="2">{stateFirst.isFamily && familyPass}</Row>
         <Row xs="2">{stateFirst.isFriend && friendPass}</Row>
@@ -213,7 +220,7 @@ const Password = ({
         style={{ marginTop: 3 + "em", marginBottom: 3 + "em" }}
         className="text-center"
       >
-        <Link to="/stranger">
+        <Link to={back}>
           <Button style={{ marginRight: 8 + "em" }} color="primary">
             Back
           </Button>

@@ -3,6 +3,10 @@ import { Container, Row, Col } from "reactstrap";
 import { Link } from "react-router-dom";
 import { Card, CardImg, CardTitle, Button, Label } from "reactstrap";
 
+const address = [ "/family", "/friend", "/colleague", "/acquaintance", "/stranger", "/pass", "/apppicker" ]
+let next='';
+let back='';
+
 const Colleagues = ({
   state,
   setState,
@@ -14,6 +18,13 @@ const Colleagues = ({
   setColleague,
   ...props
 }) => {
+  if(stateFirst.isAcquaintance) next=address[3];
+  else if(stateFirst.isStranger) next=address[4];
+  else next=address[5];
+  if(stateFirst.isFriend) back=address[1];
+  else if(stateFirst.isFamily) back=address[0];
+  else back=address[6];
+
   const pushData = () => {
     if (stateFirst.isColleague) {
       for (let i = 0; i < Apps.length; i++) {
@@ -127,12 +138,6 @@ const Colleagues = ({
             <Row xs="4">{iconCards}</Row>
           </Col>
           {stateFirst.isColleague && <Col>{colleagueCards}</Col>}
-          {!stateFirst.isColleague && (
-            <Col style={{ color: "red", textAlign: "justify" }}>
-              **You have not selected/specified any colleague entity. Please
-              continue to the next page.**
-            </Col>
-          )}
         </Row>
       </Container>
 
@@ -140,13 +145,13 @@ const Colleagues = ({
         style={{ marginTop: 3 + "em", marginBottom: 3 + "em" }}
         className="text-center"
       >
-        <Link to="/friend">
+        <Link to={back}>
           <Button style={{ marginRight: 8 + "em" }} color="primary">
             Back
           </Button>
         </Link>
 
-        <Link to="/acquaintance">
+        <Link to={next}>
           <Button style={{ marginLeft: 8 + "em" }} color="primary" onClick={pushData}>
             Next
           </Button>
