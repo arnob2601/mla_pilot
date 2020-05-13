@@ -12,6 +12,7 @@ import Colleagues from "./colleague";
 import Acquaintance from "./acquaintance";
 import Stranger from "./stranger";
 import Password from "./pass";
+import Finish from "./finish";
 import "./App.css";
 
 
@@ -22,7 +23,7 @@ const App = () => {
   const [stateFirst, setStateFirst] = useState({
     name: "",
     user: "test",
-    checkpass: "",
+    ipAddress: "73.65.252.244",
     counter: 0,
     family: [{ name: "" }],
     friends: [{ name: "" }],
@@ -41,8 +42,6 @@ const App = () => {
   const [acquaintance, setAcquaintance] = useState({});
   const [stranger, setStranger] = useState({});
   const [password, setPassword] = useState({});
-  console.log(family);
-  //const [ pass, setPass ] = useState({ password: '', checkpass: '', counter: 0});
   return (
     <div>
       <Container fluid>
@@ -178,6 +177,7 @@ const App = () => {
                     />
                   )}
                 />
+                <Route path="/finish" component={Finish} />
               </Switch>
             </Router>
           </Col>

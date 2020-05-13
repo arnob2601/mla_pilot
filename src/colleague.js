@@ -20,7 +20,7 @@ const Colleagues = ({
         for (let j = 0; j < Apps[i].length; j++) {
           //console.log(stateFirst.family[i].name, Apps[i][j].title)
           fetch(
-            `http://localhost:4000/colleague/add?user=${stateFirst.user}&sharee=${stateFirst.colleague[i].name}&app=${Apps[i][j].title}`
+            `http://${stateFirst.ipAddress}:4000/colleague/add?user=${stateFirst.user}&sharee=${stateFirst.colleague[i].name}&app=${Apps[i][j].title}`
           ).catch((err) => console.error(err));
         }
       }

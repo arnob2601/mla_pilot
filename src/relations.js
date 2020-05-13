@@ -23,31 +23,31 @@ const Relation = ({
   /*Relations insertion to database*/
   const pushFamilyData = (x) => {
     fetch(
-      `http://localhost:4000/relation/add?user=${stateFirst.user}&entity=${entity[0]}&sharee=${x}`
+      `http://${stateFirst.ipAddress}:4000/relation/add?user=${stateFirst.user}&entity=${entity[0]}&sharee=${x}`
     ).catch((err) => console.error(err));
   };
 
   const pushFriendData = (x) => {
     fetch(
-      `http://localhost:4000/relation/add?user=${stateFirst.user}&entity=${entity[1]}&sharee=${x}`
+      `http://${stateFirst.ipAddress}:4000/relation/add?user=${stateFirst.user}&entity=${entity[1]}&sharee=${x}`
     ).catch((err) => console.error(err));
   };
 
   const pushColleagueData = (x) => {
     fetch(
-      `http://localhost:4000/relation/add?user=${stateFirst.user}&entity=${entity[2]}&sharee=${x}`
+      `http://${stateFirst.ipAddress}:4000/relation/add?user=${stateFirst.user}&entity=${entity[2]}&sharee=${x}`
     ).catch((err) => console.error(err));
   };
 
   const pushAcquaintanceData = (x) => {
     fetch(
-      `http://localhost:4000/relation/add?user=${stateFirst.user}&entity=${entity[3]}&sharee=${x}`
+      `http://${stateFirst.ipAddress}:4000/relation/add?user=${stateFirst.user}&entity=${entity[3]}&sharee=${x}`
     ).catch((err) => console.error(err));
   };
 
   const pushStrangerData = (x) => {
     fetch(
-      `http://localhost:4000/relation/add?user=${stateFirst.user}&entity=${entity[4]}&sharee=${x}`
+      `http://${stateFirst.ipAddress}:4000/relation/add?user=${stateFirst.user}&entity=${entity[4]}&sharee=${x}`
     ).catch((err) => console.error(err));
   };
 

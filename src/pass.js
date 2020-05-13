@@ -3,6 +3,8 @@ import { Container, Row, Col, Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import "./App.css";
 
+const entity = ["Family", "Friend", "Colleague", "Acquaintance", "Stranger"];
+
 const Password = ({
   stateFirst,
   setStateFirst,
@@ -10,6 +12,79 @@ const Password = ({
   setPassword,
   ...props
 }) => {
+  const pushData = () => {
+    if (stateFirst.isFamily) {
+      stateFirst.family.map((rel, idx) => {
+        let text = entity[0];
+        if (rel.name !== "") {
+          text = rel.name;
+        }
+        console.log(text, password['family'+idx]);
+        fetch(
+          `http://${stateFirst.ipAddress}:4000/password/add?user=${
+            stateFirst.user
+          }&sharee=${text}&pass=${password["family" + idx]}`
+        ).catch((err) => console.error(err));
+      });
+    }
+    if (stateFirst.isFriend) {
+      stateFirst.friends.map((rel, idx) => {
+        let text = entity[1];
+        if (rel.name !== "") {
+          text = rel.name;
+        }
+        console.log(text, password['friend'+idx]);
+        fetch(
+          `http://${stateFirst.ipAddress}:4000/password/add?user=${
+            stateFirst.user
+          }&sharee=${text}&pass=${password["friend" + idx]}`
+        ).catch((err) => console.error(err));
+      });
+    }
+    if (stateFirst.isColleague) {
+      stateFirst.colleague.map((rel, idx) => {
+        let text = entity[2];
+        if (rel.name !== "") {
+          text = rel.name;
+        }
+        console.log(text, password['colleague'+idx]);
+        fetch(
+          `http://${stateFirst.ipAddress}:4000/password/add?user=${
+            stateFirst.user
+          }&sharee=${text}&pass=${password["colleague" + idx]}`
+        ).catch((err) => console.error(err));
+      });
+    }
+    if (stateFirst.isAcquaintance) {
+      stateFirst.acquaintance.map((rel, idx) => {
+        let text = entity[3];
+        if (rel.name !== "") {
+          text = rel.name;
+        }
+        console.log(text, password['acquaintance'+idx]);
+        fetch(
+          `http://${stateFirst.ipAddress}:4000/password/add?user=${
+            stateFirst.user
+          }&sharee=${text}&pass=${password["acquaintance" + idx]}`
+        ).catch((err) => console.error(err));
+      });
+    }
+    if (stateFirst.isStranger) {
+      stateFirst.stranger.map((rel, idx) => {
+        let text = entity[4];
+        if (rel.name !== "") {
+          text = rel.name;
+        }
+        console.log(text, password['stranger'+idx]);
+        fetch(
+          `http://${stateFirst.ipAddress}:4000/password/add?user=${
+            stateFirst.user
+          }&sharee=${text}&pass=${password["stranger" + idx]}`
+        ).catch((err) => console.error(err));
+      });
+    }
+  };
+
   //Family
   const handleFamilyChange = (idx) => (e) => {
     setPassword({ ...password, [idx]: e.target.value });
@@ -22,7 +97,7 @@ const Password = ({
     return (
       <Col key={idx} id={"family" + idx}>
         <input
-          style={{marginTop: 1 + "em"}}
+          style={{ marginTop: 1 + "em" }}
           placeholder={text}
           type="password"
           onChange={handleFamilyChange("family" + idx)}
@@ -44,7 +119,7 @@ const Password = ({
     return (
       <Col key={idx} id={"friend" + idx}>
         <input
-          style={{marginTop: 1 + "em"}}
+          style={{ marginTop: 1 + "em" }}
           placeholder={text}
           type="password"
           onChange={handleFriendChange("friend" + idx)}
@@ -66,7 +141,7 @@ const Password = ({
     return (
       <Col key={idx} id={"colleague" + idx}>
         <input
-          style={{marginTop: 1 + "em"}}
+          style={{ marginTop: 1 + "em" }}
           placeholder={text}
           type="password"
           onChange={handleColleagueChange("colleague" + idx)}
@@ -88,7 +163,7 @@ const Password = ({
     return (
       <Col key={idx} id={"acquaintance" + idx}>
         <input
-          style={{marginTop: 1 + "em"}}
+          style={{ marginTop: 1 + "em" }}
           placeholder={text}
           type="password"
           onChange={handleAcquaintanceChange("acquaintance" + idx)}
@@ -110,7 +185,7 @@ const Password = ({
     return (
       <Col key={idx} id={"stranger" + idx}>
         <input
-          style={{marginTop: 1 + "em"}}
+          style={{ marginTop: 1 + "em" }}
           placeholder={text}
           type="password"
           onChange={handleStrangerChange("stranger" + idx)}
@@ -128,11 +203,11 @@ const Password = ({
           passwords you set for any shared entitity or specific relation must be
           atleast four characters long.
         </p>
-        <Row xs="2">{familyPass}</Row>
-        <Row xs="2">{friendPass}</Row>
-        <Row xs="2">{colleaguePass}</Row>
-        <Row xs="2">{acquaintancePass}</Row>
-        <Row xs="2">{strangerPass}</Row>
+        <Row xs="2">{stateFirst.isFamily && familyPass}</Row>
+        <Row xs="2">{stateFirst.isFriend && friendPass}</Row>
+        <Row xs="2">{stateFirst.isColleague && colleaguePass}</Row>
+        <Row xs="2">{stateFirst.isAcquaintance && acquaintancePass}</Row>
+        <Row xs="2">{stateFirst.isStranger && strangerPass}</Row>
       </Container>
       <div
         style={{ marginTop: 3 + "em", marginBottom: 3 + "em" }}
@@ -145,7 +220,11 @@ const Password = ({
         </Link>
 
         <Link to="/finish">
-          <Button style={{ marginLeft: 8 + "em" }} color="primary">
+          <Button
+            style={{ marginLeft: 8 + "em" }}
+            color="primary"
+            onClick={pushData}
+          >
             Next
           </Button>
         </Link>
