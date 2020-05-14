@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import "./App.css";
 
 const entity = ["Family", "Friend", "Colleague", "Acquaintance", "Stranger"];
+const isChanged = [false, false, false, false, false];
 
 const Relation = ({
   stateFirst,
@@ -52,7 +53,7 @@ const Relation = ({
   };
 
   const pushData = () => {
-    if (stateFirst.isFamily) {
+    if (stateFirst.isFamily && isChanged[0]) {
       stateFirst.family.map((f, idx) => {
         if (f.name !== "") pushFamilyData(f.name);
         else pushFamilyData(entity[0]);
@@ -60,7 +61,7 @@ const Relation = ({
       });
     }
 
-    if (stateFirst.isFriend) {
+    if (stateFirst.isFriend && isChanged[1]) {
       stateFirst.friends.map((f, idx) => {
         if (f.name !== "") pushFriendData(f.name);
         else pushFriendData(entity[1]);
@@ -68,7 +69,7 @@ const Relation = ({
       });
     }
 
-    if (stateFirst.isColleague) {
+    if (stateFirst.isColleague && isChanged[1]) {
       stateFirst.colleague.map((f, idx) => {
         if (f.name !== "") pushColleagueData(f.name);
         else pushColleagueData(entity[2]);
@@ -76,7 +77,7 @@ const Relation = ({
       });
     }
 
-    if (stateFirst.isAcquaintance) {
+    if (stateFirst.isAcquaintance && isChanged[3]) {
       stateFirst.acquaintance.map((f, idx) => {
         if (f.name !== "") pushAcquaintanceData(f.name);
         else pushAcquaintanceData(entity[3]);
@@ -84,51 +85,58 @@ const Relation = ({
       });
     }
 
-    if (stateFirst.isStranger) {
+    if (stateFirst.isStranger && isChanged[4]) {
       stateFirst.stranger.map((f, idx) => {
         if (f.name !== "") pushStrangerData(f.name);
         else pushStrangerData(entity[4]);
         return 0;
       });
     }
+    for(let i=0; i<5; i++) isChanged[i]=false;
   };
 
   /*Submit Button Method*/
   const addRelation = () => {
-    let x1 = {};
-    let x2 = {};
-    let x3 = {};
-    let x4 = {};
-    let x5 = {};
-    stateFirst.family.map((f, idx) => {
-      x1["family" + idx] = [];
-      return 0;
-    });
-    setFamily({ ...family, ...x1 });
-
-    stateFirst.friends.map((f, idx) => {
-      x2["friend" + idx] = [];
-      return 0;
-    });
-    setFriend({ ...friend, ...x2 });
-
-    stateFirst.colleague.map((f, idx) => {
-      x3["colleague" + idx] = [];
-      return 0;
-    });
-    setColleague({ ...colleague, ...x3 });
-
-    stateFirst.acquaintance.map((f, idx) => {
-      x4["acquaintance" + idx] = [];
-      return 0;
-    });
-    setAcquaintance({ ...acquaintance, ...x4 });
-
-    stateFirst.stranger.map((f, idx) => {
-      x5["stranger" + idx] = [];
-      return 0;
-    });
-    setStranger({ ...stranger, ...x5 });
+    if (isChanged[0]) {
+      let x1 = {};
+      stateFirst.family.map((f, idx) => {
+        x1["family" + idx] = [];
+        return 0;
+      });
+      setFamily({ ...family, ...x1 });
+    }
+    if (isChanged[1]) {
+      let x2 = {};
+      stateFirst.friends.map((f, idx) => {
+        x2["friend" + idx] = [];
+        return 0;
+      });
+      setFriend({ ...friend, ...x2 });
+    }
+    if (isChanged[2]) {
+      let x3 = {};
+      stateFirst.colleague.map((f, idx) => {
+        x3["colleague" + idx] = [];
+        return 0;
+      });
+      setColleague({ ...colleague, ...x3 });
+    }
+    if(isChanged[3]) {
+      let x4 = {};
+      stateFirst.acquaintance.map((f, idx) => {
+        x4["acquaintance" + idx] = [];
+        return 0;
+      });
+      setAcquaintance({ ...acquaintance, ...x4 });
+    }
+    if(isChanged[4]) {
+      let x5 = {};
+      stateFirst.stranger.map((f, idx) => {
+        x5["stranger" + idx] = [];
+        return 0;
+      });
+      setStranger({ ...stranger, ...x5 });
+    }
 
     pushData();
   };
@@ -142,6 +150,7 @@ const Relation = ({
   };
 
   const handleRemoveFamily = (idx) => () => {
+    isChanged[0] = true;
     setStateFirst({
       ...stateFirst,
       family: stateFirst.family.filter((s, sidx) => idx !== sidx),
@@ -149,6 +158,7 @@ const Relation = ({
   };
 
   const handleAddFamily = () => {
+    isChanged[0] = true;
     setStateFirst({
       ...stateFirst,
       family: stateFirst.family.concat([{ name: "" }]),
@@ -164,6 +174,7 @@ const Relation = ({
   };
 
   const handleRemoveFriend = (idx) => () => {
+    isChanged[1] = true;
     setStateFirst({
       ...stateFirst,
       friends: stateFirst.friends.filter((s, sidx) => idx !== sidx),
@@ -171,6 +182,7 @@ const Relation = ({
   };
 
   const handleAddFriend = () => {
+    isChanged[1] = true;
     setStateFirst({
       ...stateFirst,
       friends: stateFirst.friends.concat([{ name: "" }]),
@@ -186,6 +198,7 @@ const Relation = ({
   };
 
   const handleRemoveColleague = (idx) => () => {
+    isChanged[2] = true;
     setStateFirst({
       ...stateFirst,
       colleague: stateFirst.colleague.filter((s, sidx) => idx !== sidx),
@@ -193,6 +206,7 @@ const Relation = ({
   };
 
   const handleAddColleague = () => {
+    isChanged[2] = true;
     setStateFirst({
       ...stateFirst,
       colleague: stateFirst.colleague.concat([{ name: "" }]),
@@ -208,6 +222,7 @@ const Relation = ({
   };
 
   const handleRemoveAcquaintance = (idx) => () => {
+    isChanged[3] = true;
     setStateFirst({
       ...stateFirst,
       acquaintance: stateFirst.acquaintance.filter((s, sidx) => idx !== sidx),
@@ -215,6 +230,7 @@ const Relation = ({
   };
 
   const handleAddAcquaintance = () => {
+    isChanged[3] = true;
     setStateFirst({
       ...stateFirst,
       acquaintance: stateFirst.acquaintance.concat([{ name: "" }]),
@@ -230,6 +246,7 @@ const Relation = ({
   };
 
   const handleRemoveStranger = (idx) => () => {
+    isChanged[4] = true;
     setStateFirst({
       ...stateFirst,
       stranger: stateFirst.stranger.filter((s, sidx) => idx !== sidx),
@@ -237,6 +254,7 @@ const Relation = ({
   };
 
   const handleAddStranger = () => {
+    isChanged[4] = true;
     setStateFirst({
       ...stateFirst,
       stranger: stateFirst.stranger.concat([{ name: "" }]),
@@ -274,6 +292,7 @@ const Relation = ({
           Please select the different entities you might be sharing your device
           with.
         </p>
+        {console.log(isChanged)}
         {(stateFirst.isFamily ||
           stateFirst.isFriend ||
           stateFirst.isColleague ||
@@ -292,6 +311,7 @@ const Relation = ({
                 type="checkbox"
                 checked={stateFirst.isFamily}
                 onChange={(e) => {
+                  isChanged[0] = true;
                   if (e.target.checked) {
                     setStateFirst({
                       ...stateFirst,
@@ -343,6 +363,7 @@ const Relation = ({
                 type="checkbox"
                 checked={stateFirst.isFriend}
                 onChange={(e) => {
+                  isChanged[1] = true;
                   if (e.target.checked) {
                     setStateFirst({
                       ...stateFirst,
@@ -397,6 +418,7 @@ const Relation = ({
                 type="checkbox"
                 checked={stateFirst.isColleague}
                 onChange={(e) => {
+                  isChanged[2] = true;
                   if (e.target.checked) {
                     setStateFirst({
                       ...stateFirst,
@@ -448,6 +470,7 @@ const Relation = ({
                 type="checkbox"
                 checked={stateFirst.isAcquaintance}
                 onChange={(e) => {
+                  isChanged[3] = true;
                   if (e.target.checked) {
                     setStateFirst({
                       ...stateFirst,
@@ -502,6 +525,7 @@ const Relation = ({
                 type="checkbox"
                 checked={stateFirst.isStranger}
                 onChange={(e) => {
+                  isChanged[4] = true;
                   if (e.target.checked) {
                     setStateFirst({
                       ...stateFirst,

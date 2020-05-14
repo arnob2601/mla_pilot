@@ -21,7 +21,7 @@ const App = () => {
   const [app, setApp] = useState(icons);
   const [stateFirst, setStateFirst] = useState({
     name: "",
-    user: "test",
+    user: "P1",
     ipAddress: "73.65.252.244",
     counter: 0,
     family: [{ name: "" }],

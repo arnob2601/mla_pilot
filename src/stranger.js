@@ -127,8 +127,9 @@ const Stranger = ({
             textAlign: "justify",
           }}
         >
-          Please drag and drop the apps in to the different entities(with
-          specific relation) that you would like to share with.
+          Please drag and drop the apps into the different
+          <span style={{fontWeight: "bold", color: "blue"}}> stranger </span> 
+          entities with whom you would like to share.
         </p>
 
         <Row>

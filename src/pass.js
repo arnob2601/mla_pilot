@@ -27,7 +27,6 @@ const Password = ({
         if (rel.name !== "") {
           text = rel.name;
         }
-        console.log(text, password['family'+idx]);
         fetch(
           `http://${stateFirst.ipAddress}:4000/password/add?user=${
             stateFirst.user
@@ -41,7 +40,6 @@ const Password = ({
         if (rel.name !== "") {
           text = rel.name;
         }
-        console.log(text, password['friend'+idx]);
         fetch(
           `http://${stateFirst.ipAddress}:4000/password/add?user=${
             stateFirst.user
@@ -55,7 +53,6 @@ const Password = ({
         if (rel.name !== "") {
           text = rel.name;
         }
-        console.log(text, password['colleague'+idx]);
         fetch(
           `http://${stateFirst.ipAddress}:4000/password/add?user=${
             stateFirst.user
@@ -69,7 +66,6 @@ const Password = ({
         if (rel.name !== "") {
           text = rel.name;
         }
-        console.log(text, password['acquaintance'+idx]);
         fetch(
           `http://${stateFirst.ipAddress}:4000/password/add?user=${
             stateFirst.user
@@ -83,7 +79,6 @@ const Password = ({
         if (rel.name !== "") {
           text = rel.name;
         }
-        console.log(text, password['stranger'+idx]);
         fetch(
           `http://${stateFirst.ipAddress}:4000/password/add?user=${
             stateFirst.user
