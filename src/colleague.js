@@ -38,14 +38,28 @@ const Colleagues = ({
     }
   };
 
+  const remove = (pid, id) => (e) => {
+    //console.log(pid, id);
+    setColleague({
+      ...colleague,
+      ["colleague" + pid]: colleague["colleague" + pid].filter((s, sidx) => id !== sidx),
+    });
+  };
+
   const Apps = Object.keys(colleague).map((key) => colleague[key]);
-  const selectedApps = Apps.map((x) =>
+  const selectedApps = Apps.map((x, pid) =>
     x.map((icon, idx) => {
       return (
-        <Card key={idx} draggable="false">
+        <Card key={idx}>
           <Label>
-            <CardImg src={icon.src} alt={icon.title} />
+            <CardImg src={icon.src} alt={icon.title} draggable="false" />
             <CardTitle className="text-center" style={{ fontSize: "12px" }}>
+            <button
+                style={{ background: "red", color: "white" }}
+                onClick={remove(pid, idx)}
+              >
+                X
+              </button>{" "}
               {icon.title}
             </CardTitle>
           </Label>

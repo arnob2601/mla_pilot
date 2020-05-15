@@ -53,7 +53,7 @@ const Relation = ({
   };
 
   const pushData = () => {
-    if (stateFirst.isFamily && isChanged[0]) {
+    if (stateFirst.isFamily) {
       stateFirst.family.map((f, idx) => {
         if (f.name !== "") pushFamilyData(f.name);
         else pushFamilyData(entity[0]);
@@ -61,7 +61,7 @@ const Relation = ({
       });
     }
 
-    if (stateFirst.isFriend && isChanged[1]) {
+    if (stateFirst.isFriend) {
       stateFirst.friends.map((f, idx) => {
         if (f.name !== "") pushFriendData(f.name);
         else pushFriendData(entity[1]);
@@ -69,7 +69,7 @@ const Relation = ({
       });
     }
 
-    if (stateFirst.isColleague && isChanged[1]) {
+    if (stateFirst.isColleague) {
       stateFirst.colleague.map((f, idx) => {
         if (f.name !== "") pushColleagueData(f.name);
         else pushColleagueData(entity[2]);
@@ -77,7 +77,7 @@ const Relation = ({
       });
     }
 
-    if (stateFirst.isAcquaintance && isChanged[3]) {
+    if (stateFirst.isAcquaintance) {
       stateFirst.acquaintance.map((f, idx) => {
         if (f.name !== "") pushAcquaintanceData(f.name);
         else pushAcquaintanceData(entity[3]);
@@ -85,7 +85,7 @@ const Relation = ({
       });
     }
 
-    if (stateFirst.isStranger && isChanged[4]) {
+    if (stateFirst.isStranger) {
       stateFirst.stranger.map((f, idx) => {
         if (f.name !== "") pushStrangerData(f.name);
         else pushStrangerData(entity[4]);
@@ -292,7 +292,6 @@ const Relation = ({
           Please select the different entities you might be sharing your device
           with.
         </p>
-        {console.log(isChanged)}
         {(stateFirst.isFamily ||
           stateFirst.isFriend ||
           stateFirst.isColleague ||

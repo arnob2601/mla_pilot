@@ -3,9 +3,17 @@ import { Container, Row, Col } from "reactstrap";
 import { Link } from "react-router-dom";
 import { Card, CardImg, CardTitle, Button, Label } from "reactstrap";
 
-const address = [ "/family", "/friend", "/colleague", "/acquaintance", "/stranger", "/pass", "/apppicker"  ]
-let next='';
-let back='';
+const address = [
+  "/family",
+  "/friend",
+  "/colleague",
+  "/acquaintance",
+  "/stranger",
+  "/pass",
+  "/apppicker",
+];
+let next = "";
+let back = "";
 
 const Friends = ({
   state,
@@ -18,12 +26,12 @@ const Friends = ({
   setFriend,
   ...props
 }) => {
-  if(stateFirst.isColleague) next=address[2];
-  else if(stateFirst.isAcquaintance) next=address[3];
-  else if(stateFirst.isStranger) next=address[4];
-  else next=address[5];
-  if(stateFirst.isFamily) back=address[0];
-  else back=address[6];
+  if (stateFirst.isColleague) next = address[2];
+  else if (stateFirst.isAcquaintance) next = address[3];
+  else if (stateFirst.isStranger) next = address[4];
+  else next = address[5];
+  if (stateFirst.isFamily) back = address[0];
+  else back = address[6];
 
   /*Selected apps for friend insertion to database*/
   const pushData = () => {
@@ -39,14 +47,28 @@ const Friends = ({
     }
   };
 
+  const remove = (pid, id) => (e) => {
+    //console.log(pid, id);
+    setFriend({
+      ...friend,
+      ["friend" + pid]: friend["friend" + pid].filter((s, sidx) => id !== sidx),
+    });
+  };
+
   const Apps = Object.keys(friend).map((key) => friend[key]);
-  const selectedApps = Apps.map((x) =>
+  const selectedApps = Apps.map((x, pid) =>
     x.map((icon, idx) => {
       return (
-        <Card key={idx} draggable="false">
+        <Card key={idx}>
           <Label>
-            <CardImg src={icon.src} alt={icon.title} />
+            <CardImg src={icon.src} alt={icon.title} draggable="false" />
             <CardTitle className="text-center" style={{ fontSize: "12px" }}>
+              <button
+                style={{ background: "red", color: "white" }}
+                onClick={remove(pid, idx)}
+              >
+                X
+              </button>{" "}
               {icon.title}
             </CardTitle>
           </Label>
@@ -131,7 +153,7 @@ const Friends = ({
           }}
         >
           Please drag and drop the apps into the different
-          <span style={{fontWeight: "bold", color: "blue"}}> friend </span> 
+          <span style={{ fontWeight: "bold", color: "blue" }}> friend </span>
           entities with whom you would like to share.
         </p>
 
@@ -154,7 +176,11 @@ const Friends = ({
         </Link>
 
         <Link to={next}>
-          <Button style={{ marginLeft: 8 + "em" }} color="primary" onClick={pushData}>
+          <Button
+            style={{ marginLeft: 8 + "em" }}
+            color="primary"
+            onClick={pushData}
+          >
             Next
           </Button>
         </Link>

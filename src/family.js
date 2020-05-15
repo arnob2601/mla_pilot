@@ -3,8 +3,15 @@ import { Container, Row, Col } from "reactstrap";
 import { Link } from "react-router-dom";
 import { Card, CardImg, CardTitle, Button, Label } from "reactstrap";
 
-const address = [ "/family", "/friend", "/colleague", "/acquaintance", "/stranger", "/pass" ]
-let next='';
+const address = [
+  "/family",
+  "/friend",
+  "/colleague",
+  "/acquaintance",
+  "/stranger",
+  "/pass",
+];
+let next = "";
 
 const Family = ({
   state,
@@ -17,11 +24,11 @@ const Family = ({
   setFamily,
   ...props
 }) => {
-  if(stateFirst.isFriend) next=address[1];
-  else if(stateFirst.isColleague) next=address[2];
-  else if(stateFirst.isAcquaintance) next=address[3];
-  else if(stateFirst.isStranger) next=address[4];
-  else next=address[5];
+  if (stateFirst.isFriend) next = address[1];
+  else if (stateFirst.isColleague) next = address[2];
+  else if (stateFirst.isAcquaintance) next = address[3];
+  else if (stateFirst.isStranger) next = address[4];
+  else next = address[5];
 
   /*Selected apps for family insertion to database*/
   const pushData = () => {
@@ -37,14 +44,28 @@ const Family = ({
     }
   };
 
+  const remove = (pid, id) => (e) => {
+    //console.log(pid, id);
+    setFamily({
+      ...family,
+      ['family'+pid]: family['family'+pid].filter((s, sidx) => id !== sidx),
+    });
+  };
+
   const Apps = Object.keys(family).map((key) => family[key]);
-  const selectedApps = Apps.map((x) =>
+  const selectedApps = Apps.map((x, pid) =>
     x.map((icon, idx) => {
       return (
-        <Card key={idx} draggable="false">
+        <Card key={idx}>
           <Label>
-            <CardImg src={icon.src} alt={icon.title} />
+            <CardImg src={icon.src} alt={icon.title} draggable="false"/>
             <CardTitle className="text-center" style={{ fontSize: "12px" }}>
+              <button
+                style={{ background: "red", color: "white" }}
+                onClick={remove(pid, idx)}
+              >
+                X
+              </button>{" "}
               {icon.title}
             </CardTitle>
           </Label>
@@ -130,7 +151,7 @@ const Family = ({
           }}
         >
           Please drag and drop the apps into the different
-          <span style={{fontWeight: "bold", color: "blue"}}> family </span> 
+          <span style={{ fontWeight: "bold", color: "blue" }}> family </span>
           entities with whom you would like to share.
         </p>
 
