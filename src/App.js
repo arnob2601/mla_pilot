@@ -3,7 +3,6 @@ import { Container, Row, Col } from "reactstrap";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { icons } from "./icons";
 import Welcome from "./welcome";
-//import Trailer from "./trailer";
 import Relation from "./relations";
 import AppPicker from "./appPicker";
 import Family from "./family";
@@ -21,7 +20,7 @@ const App = () => {
   const [app, setApp] = useState(icons);
   const [stateFirst, setStateFirst] = useState({
     name: "",
-    user: "P1",
+    user: "test",
     ipAddress: "73.65.252.244",
     counter: 0,
     family: [{ name: "" }],
@@ -41,7 +40,6 @@ const App = () => {
   const [acquaintance, setAcquaintance] = useState({});
   const [stranger, setStranger] = useState({});
   const [password, setPassword] = useState({});
-  console.log(family);
   return (
     <div>
       <Container fluid>
