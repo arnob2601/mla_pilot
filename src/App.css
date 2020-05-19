@@ -29,3 +29,8 @@
 .myButton :enabled {
   background: #ff0000;
 }
+
+.phone { 
+  width: 51%;
+  height: auto; 
+}

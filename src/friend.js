@@ -9,7 +9,7 @@ const address = [
   "/colleague",
   "/acquaintance",
   "/stranger",
-  "/pass",
+  "/summary",
   "/apppicker",
 ];
 let next = "";
@@ -152,9 +152,9 @@ const Friends = ({
             textAlign: "justify",
           }}
         >
-          Please drag and drop the apps into the different
-          <span style={{ fontWeight: "bold", color: "blue" }}> friend </span>
-          entities with whom you would like to share.
+          We are comfortable with sharing different apps with different entities. 
+          Please select (drag and drop) the apps that you are comfortable with sharing with your 
+          <span style={{ fontWeight: "bold", color: "blue" }}> friends</span>.
         </p>
 
         <Row>

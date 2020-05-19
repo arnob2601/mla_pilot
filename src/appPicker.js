@@ -84,8 +84,8 @@ const AppPicker = ({
           textAlign: "justify",
         }}
       >
-        Please select the apps that you use one your phone and select next. For
-        the rest of the process you will only see those apps.
+        Please select the apps that you use on your phone. By using ‘Add App’ feature at the bottom of the page, 
+        please add the apps that you use on your phone, but not listed in here.
       </p>
       <Container fluid>
         <Row xs="6">{iconCards}</Row>

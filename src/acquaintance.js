@@ -3,7 +3,7 @@ import { Container, Row, Col } from "reactstrap";
 import { Link } from "react-router-dom";
 import { Card, CardImg, CardTitle, Button, Label } from "reactstrap";
 
-const address = [ "/family", "/friend", "/colleague", "/acquaintance", "/stranger", "/pass", "/apppicker" ];
+const address = [ "/family", "/friend", "/colleague", "/acquaintance", "/stranger", "/summary", "/apppicker" ];
 let next='';
 let back='';
 
@@ -87,7 +87,7 @@ const Acquaintance = ({
   };
 
   const acquaintanceCards = stateFirst.acquaintance.map((rel, idx) => {
-    let text = "Acquaintance";
+    let text = "Acquaintances";
     if (rel.name !== "") {
       text = rel.name;
     }
@@ -143,9 +143,9 @@ const Acquaintance = ({
             textAlign: "justify",
           }}
         >
-          Please drag and drop the apps into the different
-          <span style={{fontWeight: "bold", color: "blue"}}> acquaintance </span> 
-          entities with whom you would like to share.
+          We are comfortable with sharing different apps with different entities. 
+          Please select (drag and drop) the apps that you are comfortable with sharing with your 
+          <span style={{ fontWeight: "bold", color: "blue" }}> acquaintances</span>.
         </p>
 
         <Row>

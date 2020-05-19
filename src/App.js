@@ -10,6 +10,7 @@ import Friends from "./friend";
 import Colleagues from "./colleague";
 import Acquaintance from "./acquaintance";
 import Stranger from "./stranger";
+import Summary from "./summary";
 import Password from "./pass";
 import Finish from "./finish";
 import "./App.css";
@@ -20,7 +21,7 @@ const App = () => {
   const [app, setApp] = useState(icons);
   const [stateFirst, setStateFirst] = useState({
     name: "",
-    user: "test",
+    user: "prof",
     ipAddress: "73.65.252.244",
     counter: 0,
     family: [{ name: "" }],
@@ -43,6 +44,14 @@ const App = () => {
   return (
     <div>
       <Container fluid>
+        <div style={{ textAlign: "center" }}>
+          <img
+            className="phone"
+            src={require("./Images/top.jpg")}
+            alt="phone_top"
+          />
+        </div>
+
         <Row>
           <Col className="app" sm="12" md={{ size: 6, offset: 3 }}>
             <Router>
@@ -164,6 +173,20 @@ const App = () => {
                   )}
                 />
                 <Route
+                  path="/summary"
+                  render={(props) => (
+                    <Summary
+                      stateFirst={stateFirst}
+                      family={family}
+                      friend={friend}
+                      colleague={colleague}
+                      acquaintance={acquaintance}
+                      stranger={stranger}
+                      {...props}
+                    />
+                  )}
+                />
+                <Route
                   path="/pass"
                   render={(props) => (
                     <Password
@@ -180,6 +203,13 @@ const App = () => {
             </Router>
           </Col>
         </Row>
+        <div style={{ textAlign: "center" }}>
+          <img
+            className="phone"
+            src={require("./Images/bot.jpg")}
+            alt="phone_bot"
+          />
+        </div>
       </Container>
     </div>
   );

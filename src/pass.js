@@ -4,15 +4,6 @@ import { Link } from "react-router-dom";
 import "./App.css";
 
 const entity = ["Family", "Friend", "Colleague", "Acquaintance", "Stranger"];
-const address = [
-  "/family",
-  "/friend",
-  "/colleague",
-  "/acquaintance",
-  "/stranger",
-  "/pass",
-];
-let back = "";
 let invalid = true;
 
 const Password = ({
@@ -23,12 +14,6 @@ const Password = ({
   ...props
 }) => {
   const p = Object.keys(password).map((key) => password[key]);
-  if (stateFirst.isStranger) back = address[4];
-  else if (stateFirst.isAcquaintance) back = address[3];
-  else if (stateFirst.isColleague) back = address[2];
-  else if (stateFirst.isFriend) back = address[1];
-  else if (stateFirst.isFamily) back = address[0];
-
   const pushData = () => {
     if (stateFirst.isFamily) {
       stateFirst.family.map((rel, idx) => {
@@ -104,7 +89,7 @@ const Password = ({
     let acquaintanceInvalid = false;
     let strangerInvalid = false;
     //Family pass validity check
-    if(stateFirst.isFamily) {
+    if (stateFirst.isFamily) {
       for (let i = 0; i < stateFirst.family.length; i++) {
         if (
           password["family" + i] === undefined ||
@@ -121,9 +106,9 @@ const Password = ({
         }
       }
     }
-    
+
     //Friend pass validity check
-    if(stateFirst.isFriend) {
+    if (stateFirst.isFriend) {
       for (let i = 0; i < stateFirst.friends.length; i++) {
         if (
           password["friend" + i] === undefined ||
@@ -139,9 +124,9 @@ const Password = ({
           break;
         }
       }
-    }  
+    }
     //Colleague pass validity check
-    if(stateFirst.isColleague) {
+    if (stateFirst.isColleague) {
       for (let i = 0; i < stateFirst.colleague.length; i++) {
         if (
           password["colleague" + i] === undefined ||
@@ -159,7 +144,7 @@ const Password = ({
       }
     }
     //Acquaintance pass validity check
-    if(stateFirst.isAcquaintance) {
+    if (stateFirst.isAcquaintance) {
       for (let i = 0; i < stateFirst.acquaintance.length; i++) {
         if (
           password["acquaintance" + i] === undefined ||
@@ -177,7 +162,7 @@ const Password = ({
       }
     }
     //Stranger pass validity check
-    if(stateFirst.isStranger) {
+    if (stateFirst.isStranger) {
       for (let i = 0; i < stateFirst.stranger.length; i++) {
         if (
           password["stranger" + i] === undefined ||
@@ -194,8 +179,14 @@ const Password = ({
         }
       }
     }
-    
-    if (familyInvalid || friendInvalid || colleagueInvalid || acquaintanceInvalid || strangerInvalid) {
+
+    if (
+      familyInvalid ||
+      friendInvalid ||
+      colleagueInvalid ||
+      acquaintanceInvalid ||
+      strangerInvalid
+    ) {
       invalid = true;
     } else {
       invalid = false;
@@ -214,7 +205,8 @@ const Password = ({
           <span style={{ color: "red" }}>Password does not match!</span>
         )}
         {password[entity + idx] === password["check" + entity + idx] &&
-          password[entity + idx] !== undefined && (
+          password[entity + idx] !== undefined &&
+          password[entity + idx] !== "" && (
             <span style={{ color: "green" }}>Password matches!</span>
           )}
       </div>
@@ -399,7 +391,7 @@ const Password = ({
         style={{ marginTop: 3 + "em", marginBottom: 3 + "em" }}
         className="text-center"
       >
-        <Link to={back}>
+        <Link to="/summary">
           <Button style={{ marginRight: 8 + "em" }} color="primary">
             Back
           </Button>

@@ -9,7 +9,7 @@ const address = [
   "/colleague",
   "/acquaintance",
   "/stranger",
-  "/pass",
+  "/summary",
 ];
 let next = "";
 
@@ -150,9 +150,9 @@ const Family = ({
             textAlign: "justify",
           }}
         >
-          Please drag and drop the apps into the different
-          <span style={{ fontWeight: "bold", color: "blue" }}> family </span>
-          entities with whom you would like to share.
+          We are comfortable with sharing different apps with different entities. 
+          Please select (drag and drop) the apps that you are comfortable with sharing with your 
+          <span style={{ fontWeight: "bold", color: "blue" }}> family members</span>.
         </p>
 
         <Row>
