@@ -1,5 +1,6 @@
 .app{
   border-style: solid;
+  min-height: 50em;
 }
 
 .para {
@@ -11,8 +12,9 @@
 
 .box {
   border-style: dashed;
-  padding: 1em 2em;
-  margin-top: 2em;
+  padding: 1em 1.5em;
+  margin-top: 1em;
+  
 }
 
 .myButton {
@@ -31,6 +33,6 @@
 }
 
 .phone { 
-  width: 51%;
+  width: 50.9%;
   height: auto; 
 }

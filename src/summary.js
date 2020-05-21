@@ -2,7 +2,6 @@ import React from "react";
 import {
   Container,
   Row,
-  Col,
   Button,
   Card,
   CardImg,
@@ -23,6 +22,7 @@ let back = "";
 
 const Summary = ({
   stateFirst,
+  setStateFirst,
   family,
   friend,
   colleague,
@@ -60,7 +60,7 @@ const Summary = ({
     return (
       <div className="box" key={idx} id={"family" + idx}>
         <p className="text-center">{text}</p>
-        <Row xs="4">{familyApps[idx]}</Row>
+        <Row xs="5">{familyApps[idx]}</Row>
       </div>
     );
   });
@@ -89,7 +89,7 @@ const Summary = ({
     return (
       <div className="box" key={idx} id={"friend" + idx}>
         <p className="text-center">{text}</p>
-        <Row xs="4">{friendApps[idx]}</Row>
+        <Row xs="5">{friendApps[idx]}</Row>
       </div>
     );
   });
@@ -118,7 +118,7 @@ const Summary = ({
     return (
       <div className="box" key={idx} id={"colleague" + idx}>
         <p className="text-center">{text}</p>
-        <Row xs="4">{colleagueApps[idx]}</Row>
+        <Row xs="5">{colleagueApps[idx]}</Row>
       </div>
     );
   });
@@ -147,7 +147,7 @@ const Summary = ({
     return (
       <div className="box" key={idx} id={"acquaintance" + idx}>
         <p className="text-center">{text}</p>
-        <Row xs="4">{acquaintanceApps[idx]}</Row>
+        <Row xs="5">{acquaintanceApps[idx]}</Row>
       </div>
     );
   });
@@ -176,10 +176,14 @@ const Summary = ({
     return (
       <div className="box" key={idx} id={"stranger" + idx}>
         <p className="text-center">{text}</p>
-        <Row xs="4">{strangerApps[idx]}</Row>
+        <Row xs="5">{strangerApps[idx]}</Row>
       </div>
     );
   });
+
+  const handleChoice = (e) => {
+    setStateFirst({ ...stateFirst, choice: e.target.value} )
+  }
 
   return (
     <div>
@@ -187,22 +191,37 @@ const Summary = ({
         <p
           style={{
             marginTop: 3 + "em",
-            //marginBottom: 3 + "em",
             textAlign: "justify",
           }}
         >
-          Here is a overview of all the shared entities you specified and all the apps you have
-          grouped into them. If you feel like making any changes you can always go back to make 
-          the changes before you move on to the next phase where you will be setting password for
-          each of those shared entities.
+          Here is an overview of the groups of apps, which you are comfortable
+          to share with different entities. Please review your selections before
+          moving forward to the next step. If needed, you can go back to a
+          previous step and make changes in your selection. In the next step,
+          you will create passwords to protect your apps from unauthorized
+          access.
         </p>
         <Row xs="2">
-          {stateFirst.isFamily && <Col>{familyCards}</Col>}
-          {stateFirst.isFriend && <Col>{friendCards}</Col>}
-          {stateFirst.isColleague && <Col>{colleagueCards}</Col>}
-          {stateFirst.isAcquaintance && <Col>{acquaintanceCards}</Col>}
-          {stateFirst.isStranger && <Col>{strangerCards}</Col>}
+          {stateFirst.isFamily && familyCards}
+          {stateFirst.isFriend && friendCards}
+          {stateFirst.isColleague && colleagueCards}
+          {stateFirst.isAcquaintance && acquaintanceCards}
+          {stateFirst.isStranger && strangerCards}
         </Row>
+        <p className="para">
+          We may have apps and information in our personal phone that we are not
+          willing to share with others. Do you have such apps and information in
+          your phone that you are not comfortable to share with anyone, in other
+          words, only you will have access to them?
+        </p>
+        <Label>        
+        <input type="radio" name="choice" value="yes" checked={stateFirst.choice === "yes"} onChange={handleChoice}/>
+        Yes
+        </Label><br/>
+        <Label>        
+        <input type="radio" name="choice" value="no" checked={stateFirst.choice === "no"} onChange={handleChoice}/>
+        No
+        </Label>
       </Container>
       <div
         style={{ marginTop: 3 + "em", marginBottom: 3 + "em" }}

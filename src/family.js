@@ -48,7 +48,7 @@ const Family = ({
     //console.log(pid, id);
     setFamily({
       ...family,
-      ['family'+pid]: family['family'+pid].filter((s, sidx) => id !== sidx),
+      ["family" + pid]: family["family" + pid].filter((s, sidx) => id !== sidx),
     });
   };
 
@@ -58,7 +58,7 @@ const Family = ({
       return (
         <Card key={idx}>
           <Label>
-            <CardImg src={icon.src} alt={icon.title} draggable="false"/>
+            <CardImg src={icon.src} alt={icon.title} draggable="false" />
             <CardTitle className="text-center" style={{ fontSize: "12px" }}>
               <button
                 style={{ background: "red", color: "white" }}
@@ -106,7 +106,7 @@ const Family = ({
         id={"family" + idx}
       >
         <p className="text-center">{text}</p>
-        <Row xs="4">{selectedApps[idx]}</Row>
+        <Row xs="5">{selectedApps[idx]}</Row>
       </div>
     );
   });
@@ -114,9 +114,9 @@ const Family = ({
   const icons = Object.keys(state).map((key) => state[key]);
   const iconCards = icons.map((icon) => {
     return (
-      <Col
+      <div
         key={icon.id}
-        style={{ marginBottom: 0.5 + "em", marginTop: 0.5 + "em" }}
+        style={{ marginTop: 0.5 + "em" }}
       >
         <Card
           onDragStart={(e) => {
@@ -135,7 +135,7 @@ const Family = ({
             </CardTitle>
           </Label>
         </Card>
-      </Col>
+      </div>
     );
   });
 
@@ -146,18 +146,22 @@ const Family = ({
         <p
           style={{
             marginTop: 3 + "em",
-            //marginBottom: 3 + "em",
             textAlign: "justify",
           }}
         >
-          We are comfortable with sharing different apps with different entities. 
-          Please select (drag and drop) the apps that you are comfortable with sharing with your 
-          <span style={{ fontWeight: "bold", color: "blue" }}> family members</span>.
+          We are comfortable with sharing different apps with different
+          entities. From the following list of apps that you have selected in
+          the previous step, please select (drag and drop) the apps that you are
+          comfortable to share with your
+          <span style={{ fontWeight: "bold", color: "blue" }}>
+            {" "}family members
+          </span>
+          .
         </p>
 
         <Row>
           <Col>
-            <Row xs="4">{iconCards}</Row>
+            <Row xs="5">{iconCards}</Row>
           </Col>
           {stateFirst.isFamily && <Col>{familyCards}</Col>}
         </Row>

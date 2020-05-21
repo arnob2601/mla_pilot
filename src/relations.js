@@ -92,7 +92,7 @@ const Relation = ({
         return 0;
       });
     }
-    for(let i=0; i<5; i++) isChanged[i]=false;
+    for (let i = 0; i < 5; i++) isChanged[i] = false;
   };
 
   /*Submit Button Method*/
@@ -121,7 +121,7 @@ const Relation = ({
       });
       setColleague({ ...colleague, ...x3 });
     }
-    if(isChanged[3]) {
+    if (isChanged[3]) {
       let x4 = {};
       stateFirst.acquaintance.map((f, idx) => {
         x4["acquaintance" + idx] = [];
@@ -129,7 +129,7 @@ const Relation = ({
       });
       setAcquaintance({ ...acquaintance, ...x4 });
     }
-    if(isChanged[4]) {
+    if (isChanged[4]) {
       let x5 = {};
       stateFirst.stranger.map((f, idx) => {
         x5["stranger" + idx] = [];
@@ -261,25 +261,30 @@ const Relation = ({
     });
   };
 
-  const selFam = () => {
-    if (stateFirst.isFamily) return <span>family members,</span>;
+  /*const selFam = () => {
+    if (stateFirst.isFamily)
+      return <span style={{ color: "red" }}>family members</span>;
   };
 
   const selFri = () => {
-    if (stateFirst.isFriend) return <span>friends,</span>;
+    if (stateFirst.isFriend)
+      return <span style={{ color: "red" }}>friends</span>;
   };
 
   const selCol = () => {
-    if (stateFirst.isColleague) return <span>colleagues,</span>;
+    if (stateFirst.isColleague)
+      return <span style={{ color: "red" }}>colleagues</span>;
   };
 
   const selAcq = () => {
-    if (stateFirst.isAcquaintance) return <span>acquaintances,</span>;
+    if (stateFirst.isAcquaintance)
+      return <span style={{ color: "red" }}>acquaintances</span>;
   };
 
   const selStr = () => {
-    if (stateFirst.isStranger) return <span>strangers</span>;
-  };
+    if (stateFirst.isStranger)
+      return <span style={{ color: "red" }}>strangers</span>;
+  };*/
 
   return (
     <div
@@ -288,22 +293,29 @@ const Relation = ({
       }}
     >
       <Container fluid>
-        <p>
-          Please select the different entities you might be sharing your device
-          with.
+        <p style={{ textAlign: "justify"}}>
+          We share our smartphone with different entities for various reasons.
+          From the following list of entities, please select with whom you
+          share, or ever shared your smartphone before.
         </p>
         {(stateFirst.isFamily ||
           stateFirst.isFriend ||
           stateFirst.isColleague ||
           stateFirst.isAcquaintance ||
           stateFirst.isStranger) && (
-          <p style={{ color: "red", textAlign: "justify" }}>
-            **You can add more specific relation(s) under {selFam()} {selFri()}{" "}
-            {selCol()} {selAcq()} {selStr()} entity for your convenience.**
+          <p style={{ color: "blue", textAlign: "justify" }}>
+            You can add more specific relation(s) for each entity if your
+            sharing preferences are different for them. For example, parents,
+            spouse, siblings are few examples of specific relations for the
+            entity: ‘Family Members’. In other words, if you are comfortable
+            with sharing the same apps on your smartphone with all of your
+            family members, you do not need to add ‘more relations’ for this
+            entity. The same rule is applicable to other entities in here, like
+            Friends, Colleagues, Acquaintances, and Strangers.
           </p>
         )}
 
-        <Row>
+        <Row style={{ marginTop: 3 + "em" }}>
           <Col>
             <Label>
               <input
@@ -338,13 +350,14 @@ const Relation = ({
                       value={shareUser.name}
                       onChange={handleFamilyChange(idx)}
                     />
-                    <button
-                      className="myButton"
-                      onClick={handleRemoveFamily(idx)}
-                      disabled={stateFirst.family.length === 1}
-                    >
-                      Remove
-                    </button>
+                    {stateFirst.family.length !== 1 && (
+                      <button
+                        className="myButton"
+                        onClick={handleRemoveFamily(idx)}
+                      >
+                        Remove
+                      </button>
+                    )}
                   </div>
                 ))}
                 <button
@@ -390,13 +403,14 @@ const Relation = ({
                       value={shareUser.name}
                       onChange={handleFriendChange(idx)}
                     />
+                    {stateFirst.friends.length !== 1 && (
                     <button
                       onClick={handleRemoveFriend(idx)}
                       style={{ width: 75, background: "red", color: "white" }}
-                      disabled={stateFirst.friends.length === 1}
                     >
                       Remove
                     </button>
+                    )}
                   </div>
                 ))}
                 <button
@@ -445,13 +459,14 @@ const Relation = ({
                       value={shareUser.name}
                       onChange={handleColleagueChange(idx)}
                     />
+                    {stateFirst.colleague.length !== 1 && (
                     <button
                       onClick={handleRemoveColleague(idx)}
                       style={{ width: 75, background: "red", color: "white" }}
-                      disabled={stateFirst.colleague.length === 1}
                     >
                       Remove
                     </button>
+                    )}
                   </div>
                 ))}
                 <button
@@ -497,13 +512,14 @@ const Relation = ({
                       value={shareUser.name}
                       onChange={handleAcquaintanceChange(idx)}
                     />
+                    {stateFirst.acquaintance.length !== 1 && (
                     <button
                       onClick={handleRemoveAcquaintance(idx)}
                       style={{ width: 75, background: "red", color: "white" }}
-                      disabled={stateFirst.acquaintance.length === 1}
                     >
                       Remove
                     </button>
+                    )}
                   </div>
                 ))}
                 <button
@@ -552,13 +568,14 @@ const Relation = ({
                       value={shareUser.name}
                       onChange={handleStrangerChange(idx)}
                     />
+                    {stateFirst.stranger.length !== 1 && (
                     <button
                       onClick={handleRemoveStranger(idx)}
                       style={{ width: 75, background: "red", color: "white" }}
-                      disabled={stateFirst.stranger.length === 1}
                     >
                       Remove
                     </button>
+                    )}
                   </div>
                 ))}
                 <button

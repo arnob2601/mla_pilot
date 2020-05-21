@@ -15,7 +15,6 @@ import Password from "./pass";
 import Finish from "./finish";
 import "./App.css";
 
-//function App(){
 const App = () => {
   const [state, setState] = useState({});
   const [app, setApp] = useState(icons);
@@ -23,7 +22,7 @@ const App = () => {
     name: "",
     user: "prof",
     ipAddress: "73.65.252.244",
-    counter: 0,
+    choice: "yes",
     family: [{ name: "" }],
     friends: [{ name: "" }],
     colleague: [{ name: "" }],
@@ -177,6 +176,7 @@ const App = () => {
                   render={(props) => (
                     <Summary
                       stateFirst={stateFirst}
+                      setStateFirst={setStateFirst}
                       family={family}
                       friend={friend}
                       colleague={colleague}

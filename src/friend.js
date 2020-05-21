@@ -109,7 +109,7 @@ const Friends = ({
         id={"friend" + idx}
       >
         <p className="text-center">{text}</p>
-        <Row xs="4">{selectedApps[idx]}</Row>
+        <Row xs="5">{selectedApps[idx]}</Row>
       </div>
     );
   });
@@ -117,10 +117,7 @@ const Friends = ({
   const icons = Object.keys(state).map((key) => state[key]);
   const iconCards = icons.map((icon) => {
     return (
-      <Col
-        key={icon.id}
-        style={{ marginBottom: 0.5 + "em", marginTop: 0.5 + "em" }}
-      >
+      <div key={icon.id} style={{ marginTop: 0.5 + "em" }}>
         <Card
           onDragStart={(e) => {
             e.dataTransfer.setData("card", JSON.stringify(icon));
@@ -138,7 +135,7 @@ const Friends = ({
             </CardTitle>
           </Label>
         </Card>
-      </Col>
+      </div>
     );
   });
 
@@ -148,18 +145,19 @@ const Friends = ({
         <p
           style={{
             marginTop: 3 + "em",
-            //marginBottom: 3 + "em",
             textAlign: "justify",
           }}
         >
-          We are comfortable with sharing different apps with different entities. 
-          Please select (drag and drop) the apps that you are comfortable with sharing with your 
+          We are comfortable with sharing different apps with different
+          entities. From the following list of apps that you have selected in
+          the previous step, please select (drag and drop) the apps that you are
+          comfortable to share with your
           <span style={{ fontWeight: "bold", color: "blue" }}> friends</span>.
         </p>
 
         <Row>
           <Col>
-            <Row xs="4">{iconCards}</Row>
+            <Row xs="5">{iconCards}</Row>
           </Col>
           {stateFirst.isFriend && <Col>{friendCards}</Col>}
         </Row>

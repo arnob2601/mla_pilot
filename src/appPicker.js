@@ -3,8 +3,16 @@ import { Container, Row, Col } from "reactstrap";
 import { Link } from "react-router-dom";
 import { Card, CardImg, CardTitle, Button, Label } from "reactstrap";
 
-const address = [ "/family", "/friend", "/colleague", "/acquaintance", "/stranger", "/pass" ]
-let next='';
+const address = [
+  "/family",
+  "/friend",
+  "/colleague",
+  "/acquaintance",
+  "/stranger",
+  "/pass",
+];
+let next = "";
+let pressed = "false";
 
 const AppPicker = ({
   state,
@@ -15,11 +23,11 @@ const AppPicker = ({
   setStateFirst,
   ...props
 }) => {
-  if(stateFirst.isFamily) next=address[0];
-  else if(stateFirst.isFriend) next=address[1];
-  else if(stateFirst.isColleague) next=address[2];
-  else if(stateFirst.isAcquaintance) next=address[3];
-  else if(stateFirst.isStranger) next=address[4];
+  if (stateFirst.isFamily) next = address[0];
+  else if (stateFirst.isFriend) next = address[1];
+  else if (stateFirst.isColleague) next = address[2];
+  else if (stateFirst.isAcquaintance) next = address[3];
+  else if (stateFirst.isStranger) next = address[4];
 
   const item = Object.keys(state).map((key) => app[key]);
 
@@ -35,6 +43,7 @@ const AppPicker = ({
       const newApp = { id, src, title };
       setApp([...app, newApp]);
       setStateFirst({ ...stateFirst, name: "" });
+      pressed = true;
     }
   };
 
@@ -42,7 +51,7 @@ const AppPicker = ({
     return (
       <Col
         key={icon.id}
-        style={{ marginBottom: 1 + "em", marginTop: 1 + "em" }}
+        style={{ marginBottom: 0.5 + "em", marginTop: 0.5 + "em" }}
       >
         <Card>
           <Label>
@@ -77,17 +86,26 @@ const AppPicker = ({
 
   return (
     <div>
-      <p
-        style={{
-          marginTop: 3 + "em",
-          marginBottom: 3 + "em",
-          textAlign: "justify",
-        }}
-      >
-        Please select the apps that you use on your phone. By using ‘Add App’ feature at the bottom of the page, 
-        please add the apps that you use on your phone, but not listed in here.
-      </p>
       <Container fluid>
+        <p
+          style={{
+            marginTop: 3 + "em",
+            marginBottom: 3 + "em",
+            textAlign: "justify",
+          }}
+        >
+          Please select the apps that you use on your phone. By using the ‘Add
+          App’ feature at the bottom of the page, please add those apps that you
+          use on your phone, but not listed in here. Remember to{" "}
+          <span style={{ fontStyle: "italic", fontWeight: "bold" }}>
+            select
+          </span>{" "}
+          a new app after you add it. <br />
+          <br />
+          Only the apps that you select in this page will be in effect for the
+          rest of the study. So, please select all of the apps that you use in
+          real life.
+        </p>
         <Row xs="6">{iconCards}</Row>
         <div style={{ marginTop: 2 + "em" }}>
           <input
@@ -103,6 +121,16 @@ const AppPicker = ({
           >
             Add App
           </button>
+          {pressed === true && (
+            <p style={{ marginTop: 1 + "em" }}>
+              Remember to{" "}
+              <span style={{ fontStyle: "italic", fontWeight: "bold" }}>
+                select
+              </span>{" "}
+              the new app after you add it, to have it in effect for the rest of
+              the study.
+            </p>
+          )}
         </div>
       </Container>
 

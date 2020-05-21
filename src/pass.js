@@ -196,20 +196,25 @@ const Password = ({
 
   const showWarning = (entity, idx) => {
     return (
-      <div style={{ marginLeft: 1 + "em" }}>
-        {password[entity + idx] !== undefined &&
-          password[entity + idx].length < 4 && (
-            <span style={{ color: "red" }}>Password too short!</span>
-          )}{" "}
-        {password[entity + idx] !== password["check" + entity + idx] && (
-          <span style={{ color: "red" }}>Password does not match!</span>
-        )}
-        {password[entity + idx] === password["check" + entity + idx] &&
-          password[entity + idx] !== undefined &&
-          password[entity + idx] !== "" && (
-            <span style={{ color: "green" }}>Password matches!</span>
+      <Row>
+        <Col>
+          {password[entity + idx] !== undefined &&
+            password[entity + idx].length < 4 && (
+              <span style={{ color: "red" }}>Password too short!</span>
+            )}
+        </Col>
+        <Col>
+          {password[entity + idx] !== password["check" + entity + idx] &&
+            password["check" + entity + idx] && (
+            <span style={{ color: "red" }}>Password does not match!</span>
           )}
-      </div>
+          {password[entity + idx] === password["check" + entity + idx] &&
+            password[entity + idx] !== undefined &&
+            password[entity + idx] !== "" && (
+              <span style={{ color: "green" }}>Password matches!</span>
+            )}
+        </Col>
+      </Row>
     );
   };
 
@@ -223,24 +228,34 @@ const Password = ({
       text = rel.name;
     }
     return (
-      <div key={idx}>
-        <Col id={"family" + idx}>
-          <input
-            style={{ marginTop: 1 + "em", width: "300px" }}
-            placeholder={"Type the password for " + text}
-            type="password"
-            onChange={handleFamilyChange("family" + idx)}
-            value={password["family" + idx]}
-          />{" "}
-          <input
-            style={{ marginTop: 1 + "em", width: "300px" }}
-            placeholder={"Retype the password to confirm"}
-            type="password"
-            onChange={handleFamilyChange("checkfamily" + idx)}
-            value={password["checkfamily" + idx]}
-          />
+      <div key={idx} style={{ marginTop: 1 + "em" }}>
+        <Col>
+          <Row>
+            <Col>Password for {text}</Col>
+          </Row>
+          <Row>
+            <Col>
+              <input
+                style={{ width: "300px" }}
+                placeholder={"Type the password"}
+                type="password"
+                onChange={handleFamilyChange("family" + idx)}
+                value={password["family" + idx]}
+              />
+            </Col>
+            <Col>
+              <input
+                style={{ width: "300px" }}
+                placeholder={"Retype the password to confirm"}
+                type="password"
+                onChange={handleFamilyChange("checkfamily" + idx)}
+                value={password["checkfamily" + idx]}
+                onPaste={(e) => e.preventDefault()}
+              />
+            </Col>
+          </Row>
+          {showWarning("family", idx)}
         </Col>
-        {showWarning("family", idx)}
       </div>
     );
   });
@@ -255,24 +270,34 @@ const Password = ({
       text = rel.name;
     }
     return (
-      <div key={idx}>
-        <Col id={"friend" + idx}>
-          <input
-            style={{ marginTop: 1 + "em", width: "300px" }}
-            placeholder={"Type the password for " + text}
-            type="password"
-            onChange={handleFriendChange("friend" + idx)}
-            value={password["friend" + idx]}
-          />{" "}
-          <input
-            style={{ marginTop: 1 + "em", width: "300px" }}
-            placeholder={"Retype the password to confirm"}
-            type="password"
-            onChange={handleFamilyChange("checkfriend" + idx)}
-            value={password["checkfriend" + idx]}
-          />
+      <div key={idx} style={{ marginTop: 1 + "em" }}>
+        <Col>
+          <Row>
+            <Col>Password for {text}</Col>
+          </Row>
+          <Row>
+            <Col>
+              <input
+                style={{ width: "300px" }}
+                placeholder={"Type the password"}
+                type="password"
+                onChange={handleFriendChange("friend" + idx)}
+                value={password["friend" + idx]}
+              />{" "}
+            </Col>
+            <Col>
+              <input
+                style={{ width: "300px" }}
+                placeholder={"Retype the password to confirm"}
+                type="password"
+                onChange={handleFamilyChange("checkfriend" + idx)}
+                value={password["checkfriend" + idx]}
+                onPaste={(e) => e.preventDefault()}
+              />
+            </Col>
+          </Row>
+          {showWarning("friend", idx)}
         </Col>
-        {showWarning("friend", idx)}
       </div>
     );
   });
@@ -287,22 +312,32 @@ const Password = ({
       text = rel.name;
     }
     return (
-      <div key={idx}>
-        <Col id={"colleague" + idx}>
-          <input
-            style={{ marginTop: 1 + "em", width: "300px" }}
-            placeholder={"Type the password for " + text}
-            type="password"
-            onChange={handleColleagueChange("colleague" + idx)}
-            value={password["colleague" + idx]}
-          />{" "}
-          <input
-            style={{ marginTop: 1 + "em", width: "300px" }}
-            placeholder={"Retype the password to confirm"}
-            type="password"
-            onChange={handleFamilyChange("checkcolleague" + idx)}
-            value={password["checkcolleague" + idx]}
-          />
+      <div key={idx} style={{ marginTop: 1 + "em" }}>
+        <Col>
+          <Row>
+            <Col>Password for {text}</Col>
+          </Row>
+          <Row>
+            <Col>
+              <input
+                style={{ width: "300px" }}
+                placeholder={"Type the password"}
+                type="password"
+                onChange={handleColleagueChange("colleague" + idx)}
+                value={password["colleague" + idx]}
+              />
+            </Col>
+            <Col>
+              <input
+                style={{ width: "300px" }}
+                placeholder={"Retype the password to confirm"}
+                type="password"
+                onChange={handleFamilyChange("checkcolleague" + idx)}
+                value={password["checkcolleague" + idx]}
+                onPaste={(e) => e.preventDefault()}
+              />
+            </Col>
+          </Row>
           {showWarning("colleague", idx)}
         </Col>
       </div>
@@ -319,22 +354,32 @@ const Password = ({
       text = rel.name;
     }
     return (
-      <div key={idx}>
-        <Col id={"acquaintance" + idx}>
-          <input
-            style={{ marginTop: 1 + "em", width: "300px" }}
-            placeholder={"Type the password for " + text}
-            type="password"
-            onChange={handleAcquaintanceChange("acquaintance" + idx)}
-            value={password["acquaintance" + idx]}
-          />{" "}
-          <input
-            style={{ marginTop: 1 + "em", width: "300px" }}
-            placeholder={"Retype the password to confirm"}
-            type="password"
-            onChange={handleFamilyChange("checkacquaintance" + idx)}
-            value={password["checkacquaintance" + idx]}
-          />
+      <div key={idx} style={{ marginTop: 1 + "em" }}>
+        <Col>
+          <Row>
+            <Col>Password for {text}</Col>
+          </Row>
+          <Row>
+            <Col>
+              <input
+                style={{ width: "300px" }}
+                placeholder={"Type the password"}
+                type="password"
+                onChange={handleAcquaintanceChange("acquaintance" + idx)}
+                value={password["acquaintance" + idx]}
+              />
+            </Col>
+            <Col>
+              <input
+                style={{ width: "300px" }}
+                placeholder={"Retype the password to confirm"}
+                type="password"
+                onChange={handleFamilyChange("checkacquaintance" + idx)}
+                value={password["checkacquaintance" + idx]}
+                onPaste={(e) => e.preventDefault()}
+              />
+            </Col>
+          </Row>
           {showWarning("acquaintance", idx)}
         </Col>
       </div>
@@ -351,22 +396,32 @@ const Password = ({
       text = rel.name;
     }
     return (
-      <div key={idx}>
-        <Col id={"stranger" + idx}>
-          <input
-            style={{ marginTop: 1 + "em", width: "300px" }}
-            placeholder={"Type the password for " + text}
-            type="password"
-            onChange={handleStrangerChange("stranger" + idx)}
-            value={password["stranger" + idx]}
-          />{" "}
-          <input
-            style={{ marginTop: 1 + "em", width: "300px" }}
-            placeholder={"Retype the password to confirm"}
-            type="password"
-            onChange={handleFamilyChange("checkstranger" + idx)}
-            value={password["checkstranger" + idx]}
-          />
+      <div key={idx} style={{ marginTop: 1 + "em" }}>
+        <Col>
+          <Row>
+            <Col>Password for {text}</Col>
+          </Row>
+          <Row>
+            <Col>
+              <input
+                style={{ width: "300px" }}
+                placeholder={"Type the password"}
+                type="password"
+                onChange={handleStrangerChange("stranger" + idx)}
+                value={password["stranger" + idx]}
+              />
+            </Col>
+            <Col>
+              <input
+                style={{ width: "300px" }}
+                placeholder={"Retype the password to confirm"}
+                type="password"
+                onChange={handleFamilyChange("checkstranger" + idx)}
+                value={password["checkstranger" + idx]}
+                onPaste={(e) => e.preventDefault()}
+              />
+            </Col>
+          </Row>
           {showWarning("stranger", idx)}
         </Col>
       </div>
@@ -376,10 +431,24 @@ const Password = ({
     <div>
       <Container fluid>
         <p className="para">
-          Please set a password for each of the shared entities along with the
-          specific relations that you may have defined within them. The
-          passwords you set for any shared entity or specific relation must be
-          at least four characters long.
+          In this step, you will create passwords to protect your apps from
+          unauthorized access. Later in this study, you will be asked to log in
+          using the passwords you create. Please carefully follow the
+          instructions below before you create the passwords.
+          <br />
+          <br /> Do Not use any of your real-life passwords. Rather you should
+          follow your general strategies of password creation.
+          <br />
+          <br /> You will create a unique password in each password-box for an
+          entity. Here, as you share your phone with an entity you will use the
+          password for that entity to unlock your phone, which will give access
+          to only those apps that you are comfortable to share with that entity.
+          <br />
+          <br /> Your password must be minimum four characters long.
+          <br />
+          <br /> Create strong passwords. You can consider the sensitivity of
+          apps shared with an entity, while creating a password for that entity
+          to protect those apps from unauthorized access.
         </p>
         <Row>{stateFirst.isFamily && familyPass}</Row>
         <Row>{stateFirst.isFriend && friendPass}</Row>
