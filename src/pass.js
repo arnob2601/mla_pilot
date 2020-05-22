@@ -13,10 +13,51 @@ const Password = ({
   setPassword,
   checkPassword,
   setCheckPassword,
+  family,
+  friend,
+  colleague,
+  acquaintance,
+  stranger,
   ...props
 }) => {
-  const p = Object.keys(password).map((key) => password[key]);
-  
+  //const p = Object.keys(password).map((key) => password[key]);
+  const famApp = Object.keys(family).map((key) => family[key]);
+  const friApp = Object.keys(friend).map((key) => friend[key]);
+  const colApp = Object.keys(colleague).map((key) => colleague[key]);
+  const acqApp = Object.keys(acquaintance).map((key) => acquaintance[key]);
+  const strApp = Object.keys(stranger).map((key) => stranger[key]);
+
+  let arr = [];
+  //arr = [...arr, [...famApp], [...friApp], [...colApp], [...acqApp], [...strApp]];
+  if (stateFirst.isFamily) {
+    arr = [...arr, [...famApp]];
+  }
+  if (stateFirst.isFriend) {
+    arr = [...arr, [...friApp]];
+  }
+  if (stateFirst.isColleague) {
+    arr = [...arr, [...colApp]];
+  }
+  if (stateFirst.isAcquaintance) {
+    arr = [...arr, [...acqApp]];
+  }
+  if (stateFirst.isStranger) {
+    arr = [...arr, [...strApp]];
+  }
+  console.log(arr.length);
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < arr[i].length; j++) {
+      for (let k = 0; k < arr.length; k++) {
+        for (let l = 0; l < arr[k].length; l++) {
+          if( i === k && j === l ) continue;
+           //console.log(i, j, k, l);
+           if(JSON.stringify(arr[i][j]) === JSON.stringify(arr[k][l])){
+             console.log("match found!")
+           }
+        }
+      }
+    }
+  }
 
   const pushData = async () => {
     await fetch(
@@ -206,9 +247,9 @@ const Password = ({
     }
     //Unique password validity check
     let index = Object.keys(password);
-    for(let i=0; i<index.length; i++) {
-      for(let j=0; j<index.length; j++) {
-        if(i !== j && password[index[i]]===password[index[j]]) {
+    for (let i = 0; i < index.length; i++) {
+      for (let j = 0; j < index.length; j++) {
+        if (i !== j && password[index[i]] === password[index[j]]) {
           uniqueValid = true;
           break;
         }
@@ -234,30 +275,36 @@ const Password = ({
   const showWarning = (entity, idx) => {
     let index = Object.keys(password);
     let flag = false;
-    for(let i=0; i<index.length; i++){
-      if(password[entity+idx]!== "" && password[entity+idx]!== undefined && password[entity+idx] === password[index[i]] && entity+idx !== index[i]) flag=true;
+    for (let i = 0; i < index.length; i++) {
+      if (
+        password[entity + idx] !== "" &&
+        password[entity + idx] !== undefined &&
+        password[entity + idx] === password[index[i]] &&
+        entity + idx !== index[i]
+      )
+        flag = true;
     }
     return (
       <div>
-      <Row>
-        <Col>
-          {password[entity + idx] && password[entity + idx].length < 4 && (
-            <span style={{ color: "red" }}>Password too short!</span>
-          )}
-          {flag && <span style={{ color: "red" }}>Not Unique!</span>}
-        </Col>
-        <Col>
-          {password[entity + idx] !== checkPassword[entity + idx] &&
-            checkPassword[entity + idx] && (
-              <span style={{ color: "red" }}>Password does not match!</span>
+        <Row>
+          <Col>
+            {password[entity + idx] && password[entity + idx].length < 4 && (
+              <span style={{ color: "red" }}>Password too short!</span>
             )}
-          {password[entity + idx] === checkPassword[entity + idx] &&
-            password[entity + idx] !== undefined &&
-            password[entity + idx] !== "" && (
-              <span style={{ color: "green" }}>Password matches!</span>
-            )}
-        </Col>
-      </Row>
+            {flag && <span style={{ color: "red" }}>Not Unique!</span>}
+          </Col>
+          <Col>
+            {password[entity + idx] !== checkPassword[entity + idx] &&
+              checkPassword[entity + idx] && (
+                <span style={{ color: "red" }}>Password does not match!</span>
+              )}
+            {password[entity + idx] === checkPassword[entity + idx] &&
+              password[entity + idx] !== undefined &&
+              password[entity + idx] !== "" && (
+                <span style={{ color: "green" }}>Password matches!</span>
+              )}
+          </Col>
+        </Row>
       </div>
     );
   };

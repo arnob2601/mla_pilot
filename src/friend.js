@@ -37,10 +37,12 @@ const Friends = ({
   const pushData = async () => {
     if (stateFirst.isFriend) {
       for (let i = 0; i < Apps.length; i++) {
+        let text = "Friends";
+        if (stateFirst.friends[i].name !== "") text = stateFirst.friends[i].name;
         for (let j = 0; j < Apps[i].length; j++) {
           //console.log(stateFirst.family[i].name, Apps[i][j].title)
           await fetch(
-            `http://${stateFirst.ipAddress}:4000/friend/add?user=${stateFirst.user}&sharee=${stateFirst.friends[i].name}&app=${Apps[i][j].title}`
+            `http://${stateFirst.ipAddress}:4000/friend/add?user=${stateFirst.user}&sharee=${text}&app=${Apps[i][j].title}`
           ).catch((err) => console.error(err));
         }
       }
@@ -56,6 +58,9 @@ const Friends = ({
   };
 
   const Apps = Object.keys(friend).map((key) => friend[key]);
+  for(let i=0;i<Apps.length;i++) {
+    Apps[i].sort((a,b) => a.id-b.id)
+  }
   const selectedApps = Apps.map((x, pid) =>
     x.map((icon, idx) => {
       return (

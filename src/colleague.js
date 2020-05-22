@@ -36,10 +36,12 @@ const Colleagues = ({
   const pushData = async () => {
     if (stateFirst.isColleague) {
       for (let i = 0; i < Apps.length; i++) {
+        let text = "Colleagues";
+        if (stateFirst.colleague[i].name !== "") text = stateFirst.colleague[i].name;
         for (let j = 0; j < Apps[i].length; j++) {
           //console.log(stateFirst.family[i].name, Apps[i][j].title)
           await fetch(
-            `http://${stateFirst.ipAddress}:4000/colleague/add?user=${stateFirst.user}&sharee=${stateFirst.colleague[i].name}&app=${Apps[i][j].title}`
+            `http://${stateFirst.ipAddress}:4000/colleague/add?user=${stateFirst.user}&sharee=${text}&app=${Apps[i][j].title}`
           ).catch((err) => console.error(err));
         }
       }
@@ -57,6 +59,9 @@ const Colleagues = ({
   };
 
   const Apps = Object.keys(colleague).map((key) => colleague[key]);
+  for(let i=0;i<Apps.length;i++) {
+    Apps[i].sort((a,b) => a.id-b.id)
+  }
   const selectedApps = Apps.map((x, pid) =>
     x.map((icon, idx) => {
       return (

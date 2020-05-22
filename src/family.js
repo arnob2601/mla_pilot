@@ -16,8 +16,6 @@ let next = "";
 const Family = ({
   state,
   setState,
-  app,
-  setApp,
   stateFirst,
   setStateFirst,
   family,
@@ -34,10 +32,12 @@ const Family = ({
   const pushData = async () => {
     if (stateFirst.isFamily) {
       for (let i = 0; i < Apps.length; i++) {
+        let text = "Family Members";
+        if (stateFirst.family[i].name !== "") text = stateFirst.family[i].name;
         for (let j = 0; j < Apps[i].length; j++) {
           //console.log(stateFirst.family[i].name, Apps[i][j].title)
           await fetch(
-            `http://${stateFirst.ipAddress}:4000/family/add?user=${stateFirst.user}&sharee=${stateFirst.family[i].name}&app=${Apps[i][j].title}`
+            `http://${stateFirst.ipAddress}:4000/family/add?user=${stateFirst.user}&sharee=${text}&app=${Apps[i][j].title}`
           ).catch((err) => console.error(err));
         }
       }
@@ -53,6 +53,9 @@ const Family = ({
   };
 
   const Apps = Object.keys(family).map((key) => family[key]);
+  for(let i=0;i<Apps.length;i++) {
+    Apps[i].sort((a,b) => a.id-b.id)
+  }
   const selectedApps = Apps.map((x, pid) =>
     x.map((icon, idx) => {
       return (
@@ -114,10 +117,7 @@ const Family = ({
   const icons = Object.keys(state).map((key) => state[key]);
   const iconCards = icons.map((icon) => {
     return (
-      <div
-        key={icon.id}
-        style={{ marginTop: 0.5 + "em" }}
-      >
+      <div key={icon.id} style={{ marginTop: 0.5 + "em" }}>
         <Card
           onDragStart={(e) => {
             e.dataTransfer.setData("card", JSON.stringify(icon));
@@ -154,7 +154,8 @@ const Family = ({
           the previous step, please select (drag and drop) the apps that you are
           comfortable to share with your
           <span style={{ fontWeight: "bold", color: "blue" }}>
-            {" "}family members
+            {" "}
+            family members
           </span>
           .
         </p>

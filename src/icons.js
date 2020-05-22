@@ -27,7 +27,7 @@ export const icons = [
   { id: 26,  src: require("./Images/Netflix.png"),           title: "Netflix" },
   { id: 27,  src: require("./Images/PayPal.jpg"),            title: "PayPal" },
   { id: 28,  src: require("./Images/Phone.png"),             title: "Phone" },
-  { id: 29,  src: require("./Images/Photos.png"),            title: "Photos" },
+  { id: 29,  src: require("./Images/Photos.jpg"),            title: "Photos" },
   { id: 30,  src: require("./Images/Prime Video.jpg"),       title: "Prime Video" },
   { id: 31,  src: require("./Images/Settings.jpg"),          title: "Settings" },
   { id: 32,  src: require("./Images/Snapchat.png"),          title: "Snapchat" },

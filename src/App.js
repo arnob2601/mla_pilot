@@ -41,7 +41,8 @@ const App = () => {
   const [stranger, setStranger] = useState({});
   const [password, setPassword] = useState({});
   const [checkPassword, setCheckPassword] = useState({});
-  //console.log(password)
+  //console.log(family)
+  //console.log(friend)
   return (
     <div>
       <Container fluid>
@@ -99,8 +100,6 @@ const App = () => {
                     <Family
                       state={state}
                       setState={setState}
-                      app={app}
-                      setApp={setApp}
                       stateFirst={stateFirst}
                       setStateFirst={setStateFirst}
                       family={family}
@@ -198,6 +197,11 @@ const App = () => {
                       setPassword={setPassword}
                       checkPassword={checkPassword}
                       setCheckPassword={setCheckPassword}
+                      family={family}
+                      friend={friend}
+                      colleague={colleague}
+                      acquaintance={acquaintance}
+                      stranger={stranger}
                       {...props}
                     />
                   )}
