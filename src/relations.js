@@ -22,32 +22,32 @@ const Relation = ({
   ...props
 }) => {
   /*Relations insertion to database*/
-  const pushFamilyData = (x) => {
-    fetch(
+  const pushFamilyData = async (x) => {
+    await fetch(
       `http://${stateFirst.ipAddress}:4000/relation/add?user=${stateFirst.user}&entity=${entity[0]}&sharee=${x}`
     ).catch((err) => console.error(err));
   };
 
-  const pushFriendData = (x) => {
-    fetch(
+  const pushFriendData = async (x) => {
+    await fetch(
       `http://${stateFirst.ipAddress}:4000/relation/add?user=${stateFirst.user}&entity=${entity[1]}&sharee=${x}`
     ).catch((err) => console.error(err));
   };
 
-  const pushColleagueData = (x) => {
-    fetch(
+  const pushColleagueData = async (x) => {
+    await fetch(
       `http://${stateFirst.ipAddress}:4000/relation/add?user=${stateFirst.user}&entity=${entity[2]}&sharee=${x}`
     ).catch((err) => console.error(err));
   };
 
-  const pushAcquaintanceData = (x) => {
-    fetch(
+  const pushAcquaintanceData = async (x) => {
+    await fetch(
       `http://${stateFirst.ipAddress}:4000/relation/add?user=${stateFirst.user}&entity=${entity[3]}&sharee=${x}`
     ).catch((err) => console.error(err));
   };
 
-  const pushStrangerData = (x) => {
-    fetch(
+  const pushStrangerData = async (x) => {
+    await fetch(
       `http://${stateFirst.ipAddress}:4000/relation/add?user=${stateFirst.user}&entity=${entity[4]}&sharee=${x}`
     ).catch((err) => console.error(err));
   };

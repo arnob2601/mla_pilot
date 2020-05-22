@@ -20,7 +20,7 @@ const App = () => {
   const [app, setApp] = useState(icons);
   const [stateFirst, setStateFirst] = useState({
     name: "",
-    user: "prof",
+    user: "test",
     ipAddress: "73.65.252.244",
     choice: "yes",
     family: [{ name: "" }],
@@ -40,6 +40,8 @@ const App = () => {
   const [acquaintance, setAcquaintance] = useState({});
   const [stranger, setStranger] = useState({});
   const [password, setPassword] = useState({});
+  const [checkPassword, setCheckPassword] = useState({});
+  //console.log(password)
   return (
     <div>
       <Container fluid>
@@ -194,6 +196,8 @@ const App = () => {
                       setStateFirst={setStateFirst}
                       password={password}
                       setPassword={setPassword}
+                      checkPassword={checkPassword}
+                      setCheckPassword={setCheckPassword}
                       {...props}
                     />
                   )}

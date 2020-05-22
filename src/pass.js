@@ -11,17 +11,24 @@ const Password = ({
   setStateFirst,
   password,
   setPassword,
+  checkPassword,
+  setCheckPassword,
   ...props
 }) => {
   const p = Object.keys(password).map((key) => password[key]);
-  const pushData = () => {
+  
+
+  const pushData = async () => {
+    await fetch(
+      `http://${stateFirst.ipAddress}:4000/password/add?user=${stateFirst.user}&sharee=DUMMY&pass=DUMMY`
+    ).catch((err) => console.error(err));
     if (stateFirst.isFamily) {
-      stateFirst.family.map((rel, idx) => {
+      stateFirst.family.map(async (rel, idx) => {
         let text = entity[0];
         if (rel.name !== "") {
           text = rel.name;
         }
-        fetch(
+        await fetch(
           `http://${stateFirst.ipAddress}:4000/password/add?user=${
             stateFirst.user
           }&sharee=${text}&pass=${password["family" + idx]}`
@@ -29,12 +36,12 @@ const Password = ({
       });
     }
     if (stateFirst.isFriend) {
-      stateFirst.friends.map((rel, idx) => {
+      stateFirst.friends.map(async (rel, idx) => {
         let text = entity[1];
         if (rel.name !== "") {
           text = rel.name;
         }
-        fetch(
+        await fetch(
           `http://${stateFirst.ipAddress}:4000/password/add?user=${
             stateFirst.user
           }&sharee=${text}&pass=${password["friend" + idx]}`
@@ -42,12 +49,12 @@ const Password = ({
       });
     }
     if (stateFirst.isColleague) {
-      stateFirst.colleague.map((rel, idx) => {
+      stateFirst.colleague.map(async (rel, idx) => {
         let text = entity[2];
         if (rel.name !== "") {
           text = rel.name;
         }
-        fetch(
+        await fetch(
           `http://${stateFirst.ipAddress}:4000/password/add?user=${
             stateFirst.user
           }&sharee=${text}&pass=${password["colleague" + idx]}`
@@ -55,12 +62,12 @@ const Password = ({
       });
     }
     if (stateFirst.isAcquaintance) {
-      stateFirst.acquaintance.map((rel, idx) => {
+      stateFirst.acquaintance.map(async (rel, idx) => {
         let text = entity[3];
         if (rel.name !== "") {
           text = rel.name;
         }
-        fetch(
+        await fetch(
           `http://${stateFirst.ipAddress}:4000/password/add?user=${
             stateFirst.user
           }&sharee=${text}&pass=${password["acquaintance" + idx]}`
@@ -68,17 +75,23 @@ const Password = ({
       });
     }
     if (stateFirst.isStranger) {
-      stateFirst.stranger.map((rel, idx) => {
+      stateFirst.stranger.map(async (rel, idx) => {
         let text = entity[4];
         if (rel.name !== "") {
           text = rel.name;
         }
-        fetch(
+        await fetch(
           `http://${stateFirst.ipAddress}:4000/password/add?user=${
             stateFirst.user
           }&sharee=${text}&pass=${password["stranger" + idx]}`
         ).catch((err) => console.error(err));
       });
+    }
+    if (stateFirst.choice === "yes") {
+      let text = "Only Me";
+      await fetch(
+        `http://${stateFirst.ipAddress}:4000/password/add?user=${stateFirst.user}&sharee=${text}&pass=${password["me"]}`
+      ).catch((err) => console.error(err));
     }
   };
 
@@ -88,17 +101,19 @@ const Password = ({
     let colleagueInvalid = false;
     let acquaintanceInvalid = false;
     let strangerInvalid = false;
+    let meInvalid = false;
+    let uniqueValid = false;
     //Family pass validity check
     if (stateFirst.isFamily) {
       for (let i = 0; i < stateFirst.family.length; i++) {
         if (
           password["family" + i] === undefined ||
-          password["checkfamily" + i] === undefined
+          checkPassword["family" + i] === undefined
         ) {
           familyInvalid = true;
           break;
         } else if (
-          password["family" + i] !== password["checkfamily" + i] ||
+          password["family" + i] !== checkPassword["family" + i] ||
           password["family" + i].length < 4
         ) {
           familyInvalid = true;
@@ -106,18 +121,17 @@ const Password = ({
         }
       }
     }
-
     //Friend pass validity check
     if (stateFirst.isFriend) {
       for (let i = 0; i < stateFirst.friends.length; i++) {
         if (
           password["friend" + i] === undefined ||
-          password["checkfriend" + i] === undefined
+          checkPassword["friend" + i] === undefined
         ) {
           friendInvalid = true;
           break;
         } else if (
-          password["friend" + i] !== password["checkfriend" + i] ||
+          password["friend" + i] !== checkPassword["friend" + i] ||
           password["friend" + i].length < 4
         ) {
           friendInvalid = true;
@@ -130,12 +144,12 @@ const Password = ({
       for (let i = 0; i < stateFirst.colleague.length; i++) {
         if (
           password["colleague" + i] === undefined ||
-          password["checkcolleague" + i] === undefined
+          checkPassword["colleague" + i] === undefined
         ) {
           colleagueInvalid = true;
           break;
         } else if (
-          password["colleague" + i] !== password["checkcolleague" + i] ||
+          password["colleague" + i] !== checkPassword["colleague" + i] ||
           password["colleague" + i].length < 4
         ) {
           colleagueInvalid = true;
@@ -148,12 +162,12 @@ const Password = ({
       for (let i = 0; i < stateFirst.acquaintance.length; i++) {
         if (
           password["acquaintance" + i] === undefined ||
-          password["checkacquaintance" + i] === undefined
+          checkPassword["acquaintance" + i] === undefined
         ) {
           acquaintanceInvalid = true;
           break;
         } else if (
-          password["acquaintance" + i] !== password["checkacquaintance" + i] ||
+          password["acquaintance" + i] !== checkPassword["acquaintance" + i] ||
           password["acquaintance" + i].length < 4
         ) {
           acquaintanceInvalid = true;
@@ -166,15 +180,36 @@ const Password = ({
       for (let i = 0; i < stateFirst.stranger.length; i++) {
         if (
           password["stranger" + i] === undefined ||
-          password["checkstranger" + i] === undefined
+          checkPassword["stranger" + i] === undefined
         ) {
           strangerInvalid = true;
           break;
         } else if (
-          password["stranger" + i] !== password["checkstranger" + i] ||
+          password["stranger" + i] !== checkPassword["stranger" + i] ||
           password["stranger" + i].length < 4
         ) {
           strangerInvalid = true;
+          break;
+        }
+      }
+    }
+    //Only me pass validity check
+    if (stateFirst.choice === "yes") {
+      if (password["me"] === undefined || checkPassword["me"] === undefined) {
+        meInvalid = true;
+      } else if (
+        password["me"] !== checkPassword["me"] ||
+        password["me"].length < 4
+      ) {
+        meInvalid = true;
+      }
+    }
+    //Unique password validity check
+    let index = Object.keys(password);
+    for(let i=0; i<index.length; i++) {
+      for(let j=0; j<index.length; j++) {
+        if(i !== j && password[index[i]]===password[index[j]]) {
+          uniqueValid = true;
           break;
         }
       }
@@ -185,7 +220,9 @@ const Password = ({
       friendInvalid ||
       colleagueInvalid ||
       acquaintanceInvalid ||
-      strangerInvalid
+      strangerInvalid ||
+      meInvalid ||
+      uniqueValid
     ) {
       invalid = true;
     } else {
@@ -195,33 +232,43 @@ const Password = ({
   };
 
   const showWarning = (entity, idx) => {
+    let index = Object.keys(password);
+    let flag = false;
+    for(let i=0; i<index.length; i++){
+      if(password[entity+idx]!== "" && password[entity+idx]!== undefined && password[entity+idx] === password[index[i]] && entity+idx !== index[i]) flag=true;
+    }
     return (
+      <div>
       <Row>
         <Col>
-          {password[entity + idx] !== undefined &&
-            password[entity + idx].length < 4 && (
-              <span style={{ color: "red" }}>Password too short!</span>
-            )}
+          {password[entity + idx] && password[entity + idx].length < 4 && (
+            <span style={{ color: "red" }}>Password too short!</span>
+          )}
+          {flag && <span style={{ color: "red" }}>Not Unique!</span>}
         </Col>
         <Col>
-          {password[entity + idx] !== password["check" + entity + idx] &&
-            password["check" + entity + idx] && (
-            <span style={{ color: "red" }}>Password does not match!</span>
-          )}
-          {password[entity + idx] === password["check" + entity + idx] &&
+          {password[entity + idx] !== checkPassword[entity + idx] &&
+            checkPassword[entity + idx] && (
+              <span style={{ color: "red" }}>Password does not match!</span>
+            )}
+          {password[entity + idx] === checkPassword[entity + idx] &&
             password[entity + idx] !== undefined &&
             password[entity + idx] !== "" && (
               <span style={{ color: "green" }}>Password matches!</span>
             )}
         </Col>
       </Row>
+      </div>
     );
   };
 
-  //Family
-  const handleFamilyChange = (idx) => (e) => {
+  const handleEntityChange = (idx) => (e) => {
     setPassword({ ...password, [idx]: e.target.value });
   };
+  const handleCheckEntityChange = (idx) => (e) => {
+    setCheckPassword({ ...checkPassword, [idx]: e.target.value });
+  };
+  //Family
   const familyPass = stateFirst.family.map((rel, idx) => {
     let text = "Family Members";
     if (rel.name !== "") {
@@ -239,7 +286,7 @@ const Password = ({
                 style={{ width: "300px" }}
                 placeholder={"Type the password"}
                 type="password"
-                onChange={handleFamilyChange("family" + idx)}
+                onChange={handleEntityChange("family" + idx)}
                 value={password["family" + idx]}
               />
             </Col>
@@ -248,8 +295,8 @@ const Password = ({
                 style={{ width: "300px" }}
                 placeholder={"Retype the password to confirm"}
                 type="password"
-                onChange={handleFamilyChange("checkfamily" + idx)}
-                value={password["checkfamily" + idx]}
+                onChange={handleCheckEntityChange("family" + idx)}
+                value={checkPassword["family" + idx]}
                 onPaste={(e) => e.preventDefault()}
               />
             </Col>
@@ -261,9 +308,6 @@ const Password = ({
   });
 
   //Friend
-  const handleFriendChange = (idx) => (e) => {
-    setPassword({ ...password, [idx]: e.target.value });
-  };
   const friendPass = stateFirst.friends.map((rel, idx) => {
     let text = "Friends";
     if (rel.name !== "") {
@@ -281,7 +325,7 @@ const Password = ({
                 style={{ width: "300px" }}
                 placeholder={"Type the password"}
                 type="password"
-                onChange={handleFriendChange("friend" + idx)}
+                onChange={handleEntityChange("friend" + idx)}
                 value={password["friend" + idx]}
               />{" "}
             </Col>
@@ -290,8 +334,8 @@ const Password = ({
                 style={{ width: "300px" }}
                 placeholder={"Retype the password to confirm"}
                 type="password"
-                onChange={handleFamilyChange("checkfriend" + idx)}
-                value={password["checkfriend" + idx]}
+                onChange={handleCheckEntityChange("friend" + idx)}
+                value={checkPassword["friend" + idx]}
                 onPaste={(e) => e.preventDefault()}
               />
             </Col>
@@ -303,9 +347,6 @@ const Password = ({
   });
 
   //Colleague
-  const handleColleagueChange = (idx) => (e) => {
-    setPassword({ ...password, [idx]: e.target.value });
-  };
   const colleaguePass = stateFirst.colleague.map((rel, idx) => {
     let text = "Colleagues";
     if (rel.name !== "") {
@@ -323,7 +364,7 @@ const Password = ({
                 style={{ width: "300px" }}
                 placeholder={"Type the password"}
                 type="password"
-                onChange={handleColleagueChange("colleague" + idx)}
+                onChange={handleEntityChange("colleague" + idx)}
                 value={password["colleague" + idx]}
               />
             </Col>
@@ -332,8 +373,8 @@ const Password = ({
                 style={{ width: "300px" }}
                 placeholder={"Retype the password to confirm"}
                 type="password"
-                onChange={handleFamilyChange("checkcolleague" + idx)}
-                value={password["checkcolleague" + idx]}
+                onChange={handleCheckEntityChange("colleague" + idx)}
+                value={checkPassword["colleague" + idx]}
                 onPaste={(e) => e.preventDefault()}
               />
             </Col>
@@ -345,9 +386,6 @@ const Password = ({
   });
 
   //Acquaintance
-  const handleAcquaintanceChange = (idx) => (e) => {
-    setPassword({ ...password, [idx]: e.target.value });
-  };
   const acquaintancePass = stateFirst.acquaintance.map((rel, idx) => {
     let text = "Acquaintances";
     if (rel.name !== "") {
@@ -365,7 +403,7 @@ const Password = ({
                 style={{ width: "300px" }}
                 placeholder={"Type the password"}
                 type="password"
-                onChange={handleAcquaintanceChange("acquaintance" + idx)}
+                onChange={handleEntityChange("acquaintance" + idx)}
                 value={password["acquaintance" + idx]}
               />
             </Col>
@@ -374,8 +412,8 @@ const Password = ({
                 style={{ width: "300px" }}
                 placeholder={"Retype the password to confirm"}
                 type="password"
-                onChange={handleFamilyChange("checkacquaintance" + idx)}
-                value={password["checkacquaintance" + idx]}
+                onChange={handleCheckEntityChange("acquaintance" + idx)}
+                value={checkPassword["acquaintance" + idx]}
                 onPaste={(e) => e.preventDefault()}
               />
             </Col>
@@ -387,9 +425,6 @@ const Password = ({
   });
 
   //Stranger
-  const handleStrangerChange = (idx) => (e) => {
-    setPassword({ ...password, [idx]: e.target.value });
-  };
   const strangerPass = stateFirst.stranger.map((rel, idx) => {
     let text = "Strangers";
     if (rel.name !== "") {
@@ -407,7 +442,7 @@ const Password = ({
                 style={{ width: "300px" }}
                 placeholder={"Type the password"}
                 type="password"
-                onChange={handleStrangerChange("stranger" + idx)}
+                onChange={handleEntityChange("stranger" + idx)}
                 value={password["stranger" + idx]}
               />
             </Col>
@@ -416,8 +451,8 @@ const Password = ({
                 style={{ width: "300px" }}
                 placeholder={"Retype the password to confirm"}
                 type="password"
-                onChange={handleFamilyChange("checkstranger" + idx)}
-                value={password["checkstranger" + idx]}
+                onChange={handleCheckEntityChange("stranger" + idx)}
+                value={checkPassword["stranger" + idx]}
                 onPaste={(e) => e.preventDefault()}
               />
             </Col>
@@ -427,6 +462,42 @@ const Password = ({
       </div>
     );
   });
+
+  //Only Me
+  const onlyMePass = () => {
+    let text = "Only Me";
+    return (
+      <div style={{ marginTop: 1 + "em" }}>
+        <Col>
+          Password for '{text}' (it will give you access to all of the apps
+          including the ones that you are not comfortable to share with anyone
+          else)
+          <Row>
+            <Col>
+              <input
+                style={{ width: "300px" }}
+                placeholder={"Type the password"}
+                type="password"
+                onChange={handleEntityChange("me")}
+                value={password["me"]}
+              />
+            </Col>
+            <Col>
+              <input
+                style={{ width: "300px" }}
+                placeholder={"Retype the password to confirm"}
+                type="password"
+                onChange={handleCheckEntityChange("me")}
+                value={checkPassword["me"]}
+                onPaste={(e) => e.preventDefault()}
+              />
+            </Col>
+          </Row>
+          {showWarning("me", "")}
+        </Col>
+      </div>
+    );
+  };
   return (
     <div>
       <Container fluid>
@@ -455,6 +526,7 @@ const Password = ({
         <Row>{stateFirst.isColleague && colleaguePass}</Row>
         <Row>{stateFirst.isAcquaintance && acquaintancePass}</Row>
         <Row>{stateFirst.isStranger && strangerPass}</Row>
+        <Row>{stateFirst.choice === "yes" && onlyMePass()}</Row>
       </Container>
       <div
         style={{ marginTop: 3 + "em", marginBottom: 3 + "em" }}

@@ -33,12 +33,12 @@ const Colleagues = ({
   else if (stateFirst.isFamily) back = address[0];
   else back = address[6];
 
-  const pushData = () => {
+  const pushData = async () => {
     if (stateFirst.isColleague) {
       for (let i = 0; i < Apps.length; i++) {
         for (let j = 0; j < Apps[i].length; j++) {
           //console.log(stateFirst.family[i].name, Apps[i][j].title)
-          fetch(
+          await fetch(
             `http://${stateFirst.ipAddress}:4000/colleague/add?user=${stateFirst.user}&sharee=${stateFirst.colleague[i].name}&app=${Apps[i][j].title}`
           ).catch((err) => console.error(err));
         }
