@@ -521,12 +521,12 @@ const Password = ({
           apps shared with an entity, while creating a password for that entity
           to protect those apps from unauthorized access.
         </p>
-        <Row>{stateFirst.isFamily && familyPass}</Row>
-        <Row>{stateFirst.isFriend && friendPass}</Row>
-        <Row>{stateFirst.isColleague && colleaguePass}</Row>
-        <Row>{stateFirst.isAcquaintance && acquaintancePass}</Row>
-        <Row>{stateFirst.isStranger && strangerPass}</Row>
-        <Row>{stateFirst.choice === "yes" && onlyMePass()}</Row>
+        {stateFirst.isFamily && familyPass}
+        {stateFirst.isFriend && friendPass}
+        {stateFirst.isColleague && colleaguePass}
+        {stateFirst.isAcquaintance && acquaintancePass}
+        {stateFirst.isStranger && strangerPass}
+        {stateFirst.choice === "yes" && onlyMePass()}
       </Container>
       <div
         style={{ marginTop: 3 + "em", marginBottom: 3 + "em" }}
