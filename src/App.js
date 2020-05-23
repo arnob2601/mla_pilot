@@ -41,8 +41,6 @@ const App = () => {
   const [stranger, setStranger] = useState({});
   const [password, setPassword] = useState({});
   const [checkPassword, setCheckPassword] = useState({});
-  //console.log(family)
-  //console.log(friend)
   return (
     <div>
       <Container fluid>
