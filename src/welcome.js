@@ -1,9 +1,12 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Button, Container } from "reactstrap";
 import { Link } from "react-router-dom";
 import "./App.css";
 
 const Welcome = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   return (
     <div className="welcome">
       <Container fluid>

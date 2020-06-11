@@ -32,4 +32,13 @@ export const icons = [
   { id: 31,  src: require("./Images/Settings.jpg"),          title: "Settings" },
   { id: 32,  src: require("./Images/Snapchat.png"),          title: "Snapchat" },
   { id: 33,  src: require("./Images/YouTube.png"),           title: "YouTube" },
+  { id: 34,  src: require("./Images/Reddit.png"),            title: "Reddit" },
+  { id: 35,  src: require("./Images/Games.jpg"),             title: "Games" },
+  { id: 36,  src: require("./Images/Walmart.jpg"),           title: "Walmart" },
+  { id: 37,  src: require("./Images/Delta Airlines.jpg"),    title: "Delta" },
+  { id: 38,  src: require("./Images/Southwest Airlines.png"),title: "Southwest" },
+  { id: 39,  src: require("./Images/Amazon Music.jpg"),      title: "Amazon Music" },
+  { id: 40,  src: require("./Images/Word.jpg"),              title: "Word" },
+  { id: 41,  src: require("./Images/Powerpoint.png"),        title: "Powerpoint" },
+  { id: 42,  src: require("./Images/Excel.png"),             title: "Excel" },
 ];

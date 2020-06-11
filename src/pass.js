@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Container, Row, Col, Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import "./App.css";
@@ -20,6 +20,9 @@ const Password = ({
   stranger,
   ...props
 }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   const famApp = Object.keys(family).map((key) => family[key]);
   const friApp = Object.keys(friend).map((key) => friend[key]);
   const colApp = Object.keys(colleague).map((key) => colleague[key]);
@@ -89,7 +92,7 @@ const Password = ({
       temp = [];
     }
   }
-  //console.log(arrPassfields);
+  console.log(arrPassfields);
   const pushData = async () => {
     await fetch(
       `http://${stateFirst.ipAddress}:4000/password/add?user=${stateFirst.user}&sharee=DUMMY&pass=DUMMY`
@@ -210,7 +213,7 @@ const Password = ({
       if (arrPassfields[i].length > 1) {
         for (let j = 0; j < arrPassfields[i].length; j++) {
           if (j === 0) text += `'${arrPassfields[i][j].name}'`;
-          else if (j === arrPassfields[j].length - 1)
+          else if (j === arrPassfields[i].length - 1)
             text += ` and '${arrPassfields[i][j].name}'`;
           else text += `, '${arrPassfields[i][j].name}'`;
         }

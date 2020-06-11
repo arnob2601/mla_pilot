@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {
   Container,
   Row,
@@ -30,6 +30,9 @@ const Summary = ({
   stranger,
   ...props
 }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   if (stateFirst.isStranger) back = address[4];
   else if (stateFirst.isAcquaintance) back = address[3];
   else if (stateFirst.isColleague) back = address[2];

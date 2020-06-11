@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Container, Row, Col } from "reactstrap";
 import { Link } from "react-router-dom";
 import { Card, CardImg, CardTitle, Button, Label } from "reactstrap";
@@ -23,6 +23,10 @@ const AppPicker = ({
   setStateFirst,
   ...props
 }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+  
   if (stateFirst.isFamily) next = address[0];
   else if (stateFirst.isFriend) next = address[1];
   else if (stateFirst.isColleague) next = address[2];

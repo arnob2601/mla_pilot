@@ -20,7 +20,7 @@ const App = () => {
   const [app, setApp] = useState(icons);
   const [stateFirst, setStateFirst] = useState({
     name: "",
-    user: "test",
+    user: "PS10",
     ipAddress: "73.65.252.244",
     choice: "yes",
     family: [{ name: "" }],

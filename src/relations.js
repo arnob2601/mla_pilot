@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Container, Row, Col, Button, Label } from "reactstrap";
 import { Link } from "react-router-dom";
 import "./App.css";
@@ -21,6 +21,10 @@ const Relation = ({
   setStranger,
   ...props
 }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   /*Relations insertion to database*/
   const pushFamilyData = async (x) => {
     await fetch(
@@ -260,31 +264,6 @@ const Relation = ({
       stranger: stateFirst.stranger.concat([{ name: "" }]),
     });
   };
-
-  /*const selFam = () => {
-    if (stateFirst.isFamily)
-      return <span style={{ color: "red" }}>family members</span>;
-  };
-
-  const selFri = () => {
-    if (stateFirst.isFriend)
-      return <span style={{ color: "red" }}>friends</span>;
-  };
-
-  const selCol = () => {
-    if (stateFirst.isColleague)
-      return <span style={{ color: "red" }}>colleagues</span>;
-  };
-
-  const selAcq = () => {
-    if (stateFirst.isAcquaintance)
-      return <span style={{ color: "red" }}>acquaintances</span>;
-  };
-
-  const selStr = () => {
-    if (stateFirst.isStranger)
-      return <span style={{ color: "red" }}>strangers</span>;
-  };*/
 
   return (
     <div

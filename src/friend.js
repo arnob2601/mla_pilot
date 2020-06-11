@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Container, Row, Col } from "reactstrap";
 import { Link } from "react-router-dom";
 import { Card, CardImg, CardTitle, Button, Label } from "reactstrap";
@@ -26,6 +26,9 @@ const Friends = ({
   setFriend,
   ...props
 }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   if (stateFirst.isColleague) next = address[2];
   else if (stateFirst.isAcquaintance) next = address[3];
   else if (stateFirst.isStranger) next = address[4];
